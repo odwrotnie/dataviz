@@ -2,7 +2,15 @@
 <meta charset="utf-8">
 
 <style>
-  .bar { fill: steelblue; }
+  body {
+    font: 10px sans-serif;
+  }
+  .bar {
+    fill: steelblue;
+  }
+  .tooltip {
+    font-size: 10 px;
+  }
 </style>
 
 <body>
@@ -32,8 +40,9 @@ var data = [
 var tooltip = d3
   .select("body")
   .append("div")
+  .attr("class", "tooltip")
 
-tooltip  
+tooltip
   .style("position", "absolute")
   .style("z-index", "10")
   .style("visibility", "hidden")
