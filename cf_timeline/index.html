@@ -14,12 +14,20 @@
 
 <script type="text/javascript">
 
-    var data = [
+    var deposits = [
         {"date": new Date(2016, 2, 2), "value": 100},
         {"date": new Date(2016, 2, 3), "value": 200},
         {"date": new Date(2016, 2, 4), "value": 300},
         {"date": new Date(2016, 2, 5), "value": 200},
         {"date": new Date(2016, 4, 6), "value": 100}
+    ]
+
+    var debits = [
+        {"date": new Date(2016, 2, 7), "value": 100},
+        {"date": new Date(2016, 2, 6), "value": 200},
+        {"date": new Date(2016, 2, 8), "value": 300},
+        {"date": new Date(2016, 2, 2), "value": 200},
+        {"date": new Date(2016, 2, 3), "value": 100}
     ]
 
     var svg = d3.select("svg")
@@ -44,13 +52,26 @@
         .call(axis);
 
     svg.selectAll(".bar")
-        .data(data)
-        .enter().append("rect")
-        .attr("class", "bar")
+        .data(deposits)
+        .enter()
+        .append("rect")
+        .attr("class", "income")
         .attr("x", 0)
         .attr("width", function(d) { return d.value; })
         .attr("y", function(d) { return scale(d.date); })
         .attr("height", 5)
+        .attr("transform", "translate(" + width / 2 + ", " + margin + ")")
+
+    svg.selectAll(".bar")
+        .data(debits)
+        .enter()
+        .append("rect")
+        .attr("class", "income")
+        .attr("x", function(d) { return -d.value; })
+        .attr("width", function(d) { return d.value; })
+        .attr("y", function(d) { return scale(d.date); })
+        .attr("height", 5)
+        .attr("transform", "translate(" + width / 2 + ", " + margin + ")")
 
 </script>
 
