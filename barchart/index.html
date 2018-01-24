@@ -10,8 +10,18 @@
   }
   .tooltip {
     font-size: 10px;
-    background-color: white;
+    text-align: center;
+    /*background-color: white;*/
     padding: 3px;
+    /*-webkit-text-stroke-width: 1px;
+    -webkit-text-stroke-color: white;*/
+  }
+  hr {
+    border: none;
+    height: 1px;
+    /* Set the hr color */
+    color: #333; /* old IE */
+    background-color: #333; /* Modern Browsers */
   }
 </style>
 
@@ -75,8 +85,8 @@ var svg = svg
   .append("g")
   .attr("transform", "translate(" + margin.left + ", " + margin.top + ")");
 
-function setTooltip(d) {
-  return tooltip.text("Label: " + d.label + "<br/> Value: " + d.value);
+function tooltipHtml(d) {
+  return "<strong>" + d.value + "</strong><hr/>Label: <strong>" + d.label + "</strong>";
 }
 
 // Append the rectangles for the bar chart
@@ -88,8 +98,8 @@ svg.selectAll(".bar")
     .attr("width", x.bandwidth())
     .attr("y", function(d) { return y(d.value); })
     .attr("height", function(d) { return height - y(d.value); })
-    .on("mouseover", function(d) { return setTooltip(d).style("visibility", "visible");})
-    .on("mousemove", function() { return tooltip.style("top", (event.pageY-10)+"px").style("left",(event.pageX+10)+"px");})
+    .on("mouseover", function(d) { return tooltip.html(tooltipHtml(d)).style("visibility", "visible");})
+    .on("mousemove", function() { return tooltip.style("top", (event.pageY+10)+"px").style("left",(event.pageX+10)+"px");})
     .on("mouseout", function() { return tooltip.style("visibility", "hidden");});
 
 // Add the x Axis
