@@ -8,40 +8,32 @@
 
 <body>
 
+<svg width="900" height="5000"></svg>
+
 <script src="http://d3js.org/d3.v4.min.js"></script>
 
 <script type="text/javascript">
-    var height = 1400, 
-        width = 1400, 
-        margin = 25,
-        offset = 50,
-        axisWidth = width - 2 * margin,
-        svg;
-    
-    function createSvg(){ // <-A
-         svg = d3.select("body").append("svg")
-            .attr("class", "axis")
-            .attr("width", width)
-            .attr("height", height);
-    }
-    
-    function renderAxis(fn, scale, i){
-        var axis = fn()
-            .scale(scale);
-        
-        svg.append("g")        
-            .attr("transform", "translate(" + width / 2 + ", " + margin + ")")
-            .call(axis);
-    }
-    
 
-    if(svg) svg.remove();
-        
-    createSvg();
-        
-    renderAxis(d3.axisRight, d3.scaleTime()
-        .domain([new Date(2016, 0, 1), new Date(2017, 0, 1)])
-        .range([0, axisWidth]), 3);
+    var svg = d3.select("svg")
+        .attr("class", "axis");
+
+    var width = +svg.attr("width");
+    var height = +svg.attr("height");
+
+    var margin = 25;
+    var axisHeight = height - 2 * margin;
+
+    var scale = d3.scaleTime()
+        .domain([new Date(2016, 0, 1), new Date(2018, 0, 1)])
+        .range([0, axisHeight])
+
+    var axis = d3.axisRight()
+        .scale(scale)
+        .ticks(10);
+
+    svg.append("g")
+        .attr("transform", "translate(" + width / 2 + ", " + margin + ")")
+        .call(axis);
 
 </script>
 
