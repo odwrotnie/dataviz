@@ -14,6 +14,14 @@
 
 <script type="text/javascript">
 
+    var data = [
+        {"date": new Date(2016, 2, 2), "value": 100},
+        {"date": new Date(2016, 2, 3), "value": 200},
+        {"date": new Date(2016, 2, 4), "value": 300},
+        {"date": new Date(2016, 2, 5), "value": 200},
+        {"date": new Date(2016, 4, 6), "value": 100}
+    ]
+
     var svg = d3.select("svg")
         .attr("class", "axis");
 
@@ -34,6 +42,15 @@
     svg.append("g")
         .attr("transform", "translate(" + width / 2 + ", " + margin + ")")
         .call(axis);
+
+    svg.selectAll(".bar")
+        .data(data)
+        .enter().append("rect")
+        .attr("class", "bar")
+        .attr("x", 0)
+        .attr("width", function(d) { return d.value; })
+        .attr("y", function(d) { return scale(d.date); })
+        .attr("height", 5)
 
 </script>
 
