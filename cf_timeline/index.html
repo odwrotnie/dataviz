@@ -38,7 +38,9 @@ path {
         {"date": new Date(2018, 1, 5), "value": 30},
         {"date": new Date(2018, 1, 10), "value": 30},
         {"date": new Date(2018, 1, 15), "value": 30},
-        {"date": new Date(2018, 2, 1), "value": 200}
+        {"date": new Date(2018, 2, 1), "value": 120},
+        {"date": new Date(2018, 2, 10), "value": 120},
+        {"date": new Date(2018, 2, 15), "value": 120}
     ]
 
     var debits = [
@@ -57,7 +59,13 @@ path {
         {"date": new Date(2018, 1, 15), "value": 120},
         {"date": new Date(2018, 1, 20), "value": 120},
         {"date": new Date(2018, 1, 20), "value": -30},
-        {"date": new Date(2018, 2, 20), "value": -30},
+        {"date": new Date(2018, 2, 1), "value": -30},
+        {"date": new Date(2018, 2, 1), "value": 90},
+        {"date": new Date(2018, 2, 10), "value": 90},
+        {"date": new Date(2018, 2, 10), "value": 210},
+        {"date": new Date(2018, 2, 15), "value": 210},
+        {"date": new Date(2018, 2, 15), "value": 330},
+        {"date": new Date(2018, 3, 1), "value": 330}
     ]
 
     var svg = d3.select("svg")
@@ -89,7 +97,7 @@ path {
         .attr("x", 0)
         .attr("width", function(d) { return d.value; })
         .attr("y", function(d) { return scale(d.date); })
-        .attr("height", 5)
+        .attr("height", 10)
         .attr("transform", "translate(" + width / 2 + ", " + margin + ")")
 
     svg.selectAll(".bar")
@@ -100,7 +108,7 @@ path {
         .attr("x", function(d) { return -d.value; })
         .attr("width", function(d) { return d.value; })
         .attr("y", function(d) { return scale(d.date); })
-        .attr("height", 5)
+        .attr("height", 10)
         .attr("transform", "translate(" + width / 2 + ", " + margin + ")");
 
     var line = d3.line()
