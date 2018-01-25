@@ -6,28 +6,58 @@
     <title>Basic Axes</title>
 </head>
 
+<style> /* set the CSS */
+
+body { font: 12px Arial;}
+
+path {
+    stroke: red;
+    stroke-width: 2;
+    fill: none;
+}
+
+.axis path,
+.axis line {
+    fill: none;
+    stroke-width: 1;
+    shape-rendering: crispEdges;
+}
+
+</style>
+
 <body>
 
-<svg width="900" height="5000"></svg>
+<svg width="900" height="2000"></svg>
 
 <script src="http://d3js.org/d3.v4.min.js"></script>
 
 <script type="text/javascript">
 
     var deposits = [
-        {"date": new Date(2016, 2, 2), "value": 100},
-        {"date": new Date(2016, 2, 3), "value": 200},
-        {"date": new Date(2016, 2, 4), "value": 300},
-        {"date": new Date(2016, 2, 5), "value": 200},
-        {"date": new Date(2016, 4, 6), "value": 100}
+        {"date": new Date(2018, 1, 1), "value": 30},
+        {"date": new Date(2018, 1, 5), "value": 30},
+        {"date": new Date(2018, 1, 10), "value": 30},
+        {"date": new Date(2018, 1, 15), "value": 30},
+        {"date": new Date(2018, 2, 1), "value": 200}
     ]
 
     var debits = [
-        {"date": new Date(2016, 2, 7), "value": 100},
-        {"date": new Date(2016, 2, 6), "value": 200},
-        {"date": new Date(2016, 2, 8), "value": 300},
-        {"date": new Date(2016, 2, 2), "value": 200},
-        {"date": new Date(2016, 2, 3), "value": 100}
+        {"date": new Date(2018, 1, 20), "value": 150}
+    ]
+
+    var balances = [
+        {"date": new Date(2018, 0, 0), "value": 0},
+        {"date": new Date(2018, 1, 1), "value": 0},
+        {"date": new Date(2018, 1, 1), "value": 30},
+        {"date": new Date(2018, 1, 5), "value": 30},
+        {"date": new Date(2018, 1, 5), "value": 60},
+        {"date": new Date(2018, 1, 10), "value": 60},
+        {"date": new Date(2018, 1, 10), "value": 90},
+        {"date": new Date(2018, 1, 15), "value": 90},
+        {"date": new Date(2018, 1, 15), "value": 120},
+        {"date": new Date(2018, 1, 20), "value": 120},
+        {"date": new Date(2018, 1, 20), "value": -30},
+        {"date": new Date(2018, 2, 20), "value": -30},
     ]
 
     var svg = d3.select("svg")
@@ -40,7 +70,7 @@
     var axisHeight = height - 2 * margin;
 
     var scale = d3.scaleTime()
-        .domain([new Date(2016, 0, 1), new Date(2018, 0, 1)])
+        .domain([new Date(2018, 0, 1), new Date(2018, 3, 1)])
         .range([0, axisHeight])
 
     var axis = d3.axisRight()
@@ -71,7 +101,17 @@
         .attr("width", function(d) { return d.value; })
         .attr("y", function(d) { return scale(d.date); })
         .attr("height", 5)
-        .attr("transform", "translate(" + width / 2 + ", " + margin + ")")
+        .attr("transform", "translate(" + width / 2 + ", " + margin + ")");
+
+    var line = d3.line()
+        .x(function(d) { return d.value; })
+        .y(function(d) { return scale(d.date); });
+
+    svg.append("path")
+        .attr("class", "result")
+        .style("stroke-dasharray", ("3, 3"))
+        .attr("d", line(balances))
+        .attr("transform", "translate(" + width / 2 + ", " + margin + ")");
 
 </script>
 
