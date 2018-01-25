@@ -41,7 +41,7 @@ path {
 
 <body>
 
-<svg width="900" height="2000"></svg>
+<svg width="900" height="1000"></svg>
 
 <script src="http://d3js.org/d3.v4.min.js"></script>
 
@@ -103,6 +103,16 @@ path {
         .attr("transform", "translate(" + width / 2 + ", " + margin + ")")
         .call(axis);
 
+    var line = d3.line()
+        .x(function(d) { return d.value; })
+        .y(function(d) { return scale(d.date); });
+
+    svg.append("path")
+        .attr("class", "result")
+        .style("stroke-dasharray", ("2, 2"))
+        .attr("d", line(balances))
+        .attr("transform", "translate(" + width / 2 + ", " + margin + ")");
+
     svg.selectAll(".bar")
         .data(deposits)
         .enter()
@@ -112,7 +122,16 @@ path {
         .attr("width", function(d) { return d.value; })
         .attr("y", function(d) { return scale(d.date); })
         .attr("height", 10)
-        .attr("transform", "translate(" + width / 2 + ", " + margin + ")")
+        .attr("transform", "translate(" + width / 2 + ", " + margin + ")");
+
+    svg.selectAll(".bar")
+        .data(deposits)
+        .enter()
+        .append("text")
+        .attr("x", width / 2 - 110)
+        .attr("y", function(d) { return scale(d.date); })
+        .text(function(d) { return "FV +" + d.value + ".000,00 zł"; })
+        .attr("transform", "translate(" + width / 2 + ", " + margin + ")");
 
     svg.selectAll(".bar")
         .data(debits)
@@ -125,15 +144,27 @@ path {
         .attr("height", 10)
         .attr("transform", "translate(" + width / 2 + ", " + margin + ")");
 
-    var line = d3.line()
-        .x(function(d) { return d.value; })
-        .y(function(d) { return scale(d.date); });
+    svg.selectAll(".bar")
+        .data(debits)
+        .enter()
+        .append("text")
+        .attr("x", 0)
+        .attr("y", function(d) { return scale(d.date); })
+        .text(function(d) { return "FV -" + d.value + ".000,00 zł"; })
+        .attr("transform", "translate(" + 0 + ", " + margin + ")");
 
-    svg.append("path")
-        .attr("class", "result")
-        .style("stroke-dasharray", ("3, 3"))
-        .attr("d", line(balances))
+    svg.append("text")
+        .attr("x", 10)
+        .attr("y", 20)
+        .text("Rentowność: 120.000,00 zł")
         .attr("transform", "translate(" + width / 2 + ", " + margin + ")");
+
+    // svg.selectAll(".text")
+    //     .data(debits)
+    //     .enter()
+    //     .text(function(d) { return "asdf" })
+    //     .attr("transform", "translate(" + width / 2 + ", " + margin + ")");
+
 
 </script>
 
