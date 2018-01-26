@@ -89,8 +89,8 @@ path {
         {"date": new Date(2018, 2, 1), "value": -30},
         {"date": new Date(2018, 2, 1), "value": 90},
         {"date": new Date(2018, 2, 10), "value": 90},
-        {"date": new Date(2018, 2, 10), "value": 210},
-        {"date": new Date(2018, 2, 15), "value": 210},
+        {"date": new Date(2018, 2, 10), "value": 190},
+        {"date": new Date(2018, 2, 15), "value": 190},
         {"date": new Date(2018, 2, 15), "value": 330},
         {"date": new Date(2018, 3, 1), "value": 330}
     ]
@@ -111,9 +111,10 @@ path {
     console.log("X: " + valueScale(-111));
 
     var line = d3.line()
-        .x(function(d) { return d.value; })
+        .x(function(d) { return valueScale(d.value); })
         .y(function(d) { return timeScale(d.date); });
 
+    // BALANCE
     svg.append("path")
         .attr("class", "result")
         .style("stroke-dasharray", ("2, 2"))
@@ -177,14 +178,14 @@ path {
             .scale(timeScale)
             .ticks(10);
         svg.append("g")
-            .attr("transform", "translate(" + width / 2 + ", " + margin + ")")
+            .attr("transform", "translate(" + middleWidth + ", " + margin + ")")
             .call(timeAxis);
         return timeScale;
     }
 
     function createValueScale(svg) {
         var valueScale = d3.scaleLinear()
-            .domain([-200, 200])
+            .domain([-350, 350])
             .range([-middleWidth, middleWidth]);
         var valueAxis = d3.axisTop()
             .scale(valueScale)
