@@ -41,7 +41,7 @@ path {
 
 <body>
 
-<svg width="900" height="1000"></svg>
+<svg width="900" height="1500"></svg>
 
 <script src="../lib/d3/d3.js"></script>
 <!--<script src="../lib/d3-collection/d3-collection.js"></script>-->
@@ -57,11 +57,12 @@ path {
         {"date": new Date(2018, 2, 1), "value": 120},
         {"date": new Date(2018, 2, 10), "value": 120},
         {"date": new Date(2018, 2, 15), "value": 120}
-    ]
+    ];
 
-    console.log(deposits)
+    var parseTime = d3.timeParse("%d-%m-%Y");
+    console.log("Date: " + parseTime("01-01-2010"));
 
-    var x = []
+    var x = [];
 
     function printElt(element, index, array) {
         console.log("[" + index + "] jest " + element.value);
@@ -105,10 +106,14 @@ path {
     var margin = 25;
     var axisHeight = height - 2 * margin;
 
-    var timeScale = createTimeScale(svg);
+    var timeScale = createTimeScale(svg,
+        new Date(2018, 0, 1),
+        new Date(2018, 3, 1),
+        axisHeight);
     var valueScale = createValueScale(svg);
 
-    console.log("X: " + valueScale(-111));
+    var oneDayHeight = timeScale(new Date(2000, 1, 2)) - timeScale(new Date(2000, 1, 1))
+    console.log("One day height: " + oneDayHeight);
 
     var line = d3.line()
         .x(function(d) { return valueScale(d.value); })
@@ -130,7 +135,7 @@ path {
         .attr("x", 0)
         .attr("width", function(d) { return valueScale(d.value); })
         .attr("y", function(d) { return timeScale(d.date); })
-        .attr("height", 10)
+        .attr("height", oneDayHeight - 1)
         .attr("transform", "translate(" + middleWidth + ", " + margin + ")");
 
     svg.selectAll(".bar")
@@ -150,7 +155,7 @@ path {
         .attr("x", function(d) { return valueScale(-d.value); })
         .attr("width", function(d) { return valueScale(d.value); })
         .attr("y", function(d) { return timeScale(d.date); })
-        .attr("height", 10)
+        .attr("height", oneDayHeight - 1)
         .attr("transform", "translate(" + middleWidth + ", " + margin + ")");
 
     svg.selectAll(".bar")
@@ -170,10 +175,10 @@ path {
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    function createTimeScale(svg) {
+    function createTimeScale(svg, startDate, stopDate, height) {
         var timeScale = d3.scaleTime()
-            .domain([new Date(2018, 0, 1), new Date(2018, 3, 1)])
-            .range([0, axisHeight]);
+            .domain([startDate, stopDate])
+            .range([0, height]);
         var timeAxis = d3.axisRight()
             .scale(timeScale)
             .ticks(10);
