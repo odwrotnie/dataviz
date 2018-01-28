@@ -1,0 +1,30 @@
+body {
+    font: 8px Arial;
+}
+
+path {
+    stroke: black;
+    stroke-width: 2;
+    fill: none;
+}
+
+.result {
+    stroke: red;
+}
+
+.axis path,
+.axis line {
+    fill: none;
+    stroke-width: 1;
+    shape-rendering: crispEdges;
+}
+
+.deposit {
+    fill: lightgreen;
+    stroke-width:0
+}
+
+.debit {
+    fill: orangered;
+    stroke-width:0
+}
