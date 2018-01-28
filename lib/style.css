@@ -1,10 +1,14 @@
 body {
-    font: 8px Arial;
+    font: 8px sans-serif;
+}
+
+.bar {
+    fill: steelblue;
 }
 
 path {
     stroke: black;
-    stroke-width: 2;
+    stroke-width: 1;
     fill: none;
 }
 
@@ -40,7 +44,6 @@ path {
 hr {
     border: none;
     height: 1px;
-    /* Set the hr color */
-    color: #333; /* old IE */
-    background-color: #333; /* Modern Browsers */
+    color: black;
+    background-color: black;
 }
