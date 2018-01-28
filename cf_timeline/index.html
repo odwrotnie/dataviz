@@ -62,6 +62,8 @@ path {
         {"date": "2018-02-05", "value": 30},
         {"date": "2018-02-10", "value": 30},
         {"date": "2018-02-15", "value": 30},
+        {"date": "2018-02-20", "value": -150},
+        {"date": "2018-02-22", "value": -50},
         {"date": "2018-03-01", "value": 120},
         {"date": "2018-03-10", "value": 120},
         {"date": "2018-03-15", "value": 120}
@@ -76,31 +78,6 @@ path {
     });
 
     console.log(deposits, balances);
-
-    var debits = [
-        {"date": new Date(2018, 1, 20), "value": 150}
-    ]
-
-    // var balances = [
-    //     {"date": new Date(2018, 0, 0), "value": 0},
-    //     {"date": new Date(2018, 1, 1), "value": 0},
-    //     {"date": new Date(2018, 1, 1), "value": 30},
-    //     {"date": new Date(2018, 1, 5), "value": 30},
-    //     {"date": new Date(2018, 1, 5), "value": 60},
-    //     {"date": new Date(2018, 1, 10), "value": 60},
-    //     {"date": new Date(2018, 1, 10), "value": 90},
-    //     {"date": new Date(2018, 1, 15), "value": 90},
-    //     {"date": new Date(2018, 1, 15), "value": 120},
-    //     {"date": new Date(2018, 1, 20), "value": 120},
-    //     {"date": new Date(2018, 1, 20), "value": -30},
-    //     {"date": new Date(2018, 2, 1), "value": -30},
-    //     {"date": new Date(2018, 2, 1), "value": 90},
-    //     {"date": new Date(2018, 2, 10), "value": 90},
-    //     {"date": new Date(2018, 2, 10), "value": 190},
-    //     {"date": new Date(2018, 2, 15), "value": 190},
-    //     {"date": new Date(2018, 2, 15), "value": 330},
-    //     {"date": new Date(2018, 3, 1), "value": 330}
-    // ]
 
     var svg = d3.select("svg")
         .attr("class", "axis");
@@ -137,41 +114,41 @@ path {
         .data(deposits)
         .enter()
         .append("rect")
-        .attr("class", "deposit")
-        .attr("x", 0)
-        .attr("width", function(d) { return valueScale(d.value); })
+        .attr("class", function(d) { if(d.value >= 0) { return "deposit"; } else { return "debit"; }; })
+        .attr("x", function(d) { if(d.value >= 0) { return 0; } else { return -valueScale(Math.abs(d.value)); }; })
+        .attr("width", function(d) { return valueScale(Math.abs(d.value)); })
         .attr("y", function(d) { return timeScale(d.date); })
         .attr("height", oneDayHeight - 1)
         .attr("transform", "translate(" + middleWidth + ", " + margin + ")");
 
-    svg.selectAll(".bar")
-        .data(deposits)
-        .enter()
-        .append("text")
-        .attr("x", width / 2 - 110)
-        .attr("y", function(d) { return timeScale(d.date); })
-        .text(function(d) { return "FV +" + d.value + ".000,00 zł"; })
-        .attr("transform", "translate(" + middleWidth + ", " + margin + ")");
+    // svg.selectAll(".bar")
+    //     .data(deposits)
+    //     .enter()
+    //     .append("text")
+    //     .attr("x", width / 2 - 110)
+    //     .attr("y", function(d) { return timeScale(d.date); })
+    //     .text(function(d) { return "FV +" + d.value + ".000,00 zł"; })
+    //     .attr("transform", "translate(" + middleWidth + ", " + margin + ")");
 
-    svg.selectAll(".bar")
-        .data(debits)
-        .enter()
-        .append("rect")
-        .attr("class", "debit")
-        .attr("x", function(d) { return valueScale(-d.value); })
-        .attr("width", function(d) { return valueScale(d.value); })
-        .attr("y", function(d) { return timeScale(d.date); })
-        .attr("height", oneDayHeight - 1)
-        .attr("transform", "translate(" + middleWidth + ", " + margin + ")");
+    // svg.selectAll(".bar")
+    //     .data(debits)
+    //     .enter()
+    //     .append("rect")
+    //     .attr("class", "debit")
+    //     .attr("x", function(d) { return valueScale(-d.value); })
+    //     .attr("width", function(d) { return valueScale(d.value); })
+    //     .attr("y", function(d) { return timeScale(d.date); })
+    //     .attr("height", oneDayHeight - 1)
+    //     .attr("transform", "translate(" + middleWidth + ", " + margin + ")");
 
-    svg.selectAll(".bar")
-        .data(debits)
-        .enter()
-        .append("text")
-        .attr("x", 0)
-        .attr("y", function(d) { return timeScale(d.date); })
-        .text(function(d) { return "FV -" + d.value + ".000,00 zł"; })
-        .attr("transform", "translate(" + 0 + ", " + margin + ")");
+    // svg.selectAll(".bar")
+    //     .data(debits)
+    //     .enter()
+    //     .append("text")
+    //     .attr("x", 0)
+    //     .attr("y", function(d) { return timeScale(d.date); })
+    //     .text(function(d) { return "FV -" + d.value + ".000,00 zł"; })
+    //     .attr("transform", "translate(" + 0 + ", " + margin + ")");
 
     svg.append("text")
         .attr("x", 10)
@@ -196,7 +173,7 @@ path {
 
     function createValueScale(svg) {
         var valueScale = d3.scaleLinear()
-            .domain([-350, 350])
+            .domain([-1450, 1450])
             .range([-middleWidth, middleWidth]);
         var valueAxis = d3.axisTop()
             .scale(valueScale)
