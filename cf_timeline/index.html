@@ -49,52 +49,58 @@ path {
 
 <script type="text/javascript">
 
+    Array.prototype.flatMap = function(lambda) {
+        return Array.prototype.concat.apply([], this.map(lambda));
+    };
+
+    var parseTime = d3.timeParse("%Y-%m-%d");
+
+    var startDay = parseTime("2018-01-01");
+
     var deposits = [
-        {"date": new Date(2018, 1, 1), "value": 30},
-        {"date": new Date(2018, 1, 5), "value": 30},
-        {"date": new Date(2018, 1, 10), "value": 30},
-        {"date": new Date(2018, 1, 15), "value": 30},
-        {"date": new Date(2018, 2, 1), "value": 120},
-        {"date": new Date(2018, 2, 10), "value": 120},
-        {"date": new Date(2018, 2, 15), "value": 120}
+        {"date": "2018-02-01", "value": 30},
+        {"date": "2018-02-05", "value": 30},
+        {"date": "2018-02-10", "value": 30},
+        {"date": "2018-02-15", "value": 30},
+        {"date": "2018-03-01", "value": 120},
+        {"date": "2018-03-10", "value": 120},
+        {"date": "2018-03-15", "value": 120}
     ];
 
-    var parseTime = d3.timeParse("%d-%m-%Y");
-    console.log("Date: " + parseTime("01-01-2010"));
+    var prev = {"date": startDay, "value": 0};
+    var balances = deposits.flatMap(d => {
+        d.date = parseTime(d.date);
+        var x = {"date": d.date, "value": prev.value};
+        prev = {"date": d.date, "value": prev.value + d.value};
+        return [x, prev];
+    });
 
-    var x = [];
-
-    function printElt(element, index, array) {
-        console.log("[" + index + "] jest " + element.value);
-    }
-    deposits.forEach(printElt);
-
-    console.log(x)
+    console.log(deposits, balances);
 
     var debits = [
         {"date": new Date(2018, 1, 20), "value": 150}
     ]
 
-    var balances = [
-        {"date": new Date(2018, 0, 0), "value": 0},
-        {"date": new Date(2018, 1, 1), "value": 0},
-        {"date": new Date(2018, 1, 1), "value": 30},
-        {"date": new Date(2018, 1, 5), "value": 30},
-        {"date": new Date(2018, 1, 5), "value": 60},
-        {"date": new Date(2018, 1, 10), "value": 60},
-        {"date": new Date(2018, 1, 10), "value": 90},
-        {"date": new Date(2018, 1, 15), "value": 90},
-        {"date": new Date(2018, 1, 15), "value": 120},
-        {"date": new Date(2018, 1, 20), "value": 120},
-        {"date": new Date(2018, 1, 20), "value": -30},
-        {"date": new Date(2018, 2, 1), "value": -30},
-        {"date": new Date(2018, 2, 1), "value": 90},
-        {"date": new Date(2018, 2, 10), "value": 90},
-        {"date": new Date(2018, 2, 10), "value": 190},
-        {"date": new Date(2018, 2, 15), "value": 190},
-        {"date": new Date(2018, 2, 15), "value": 330},
-        {"date": new Date(2018, 3, 1), "value": 330}
-    ]
+    // var balances = [
+    //     {"date": new Date(2018, 0, 0), "value": 0},
+    //     {"date": new Date(2018, 1, 1), "value": 0},
+    //     {"date": new Date(2018, 1, 1), "value": 30},
+    //     {"date": new Date(2018, 1, 5), "value": 30},
+    //     {"date": new Date(2018, 1, 5), "value": 60},
+    //     {"date": new Date(2018, 1, 10), "value": 60},
+    //     {"date": new Date(2018, 1, 10), "value": 90},
+    //     {"date": new Date(2018, 1, 15), "value": 90},
+    //     {"date": new Date(2018, 1, 15), "value": 120},
+    //     {"date": new Date(2018, 1, 20), "value": 120},
+    //     {"date": new Date(2018, 1, 20), "value": -30},
+    //     {"date": new Date(2018, 2, 1), "value": -30},
+    //     {"date": new Date(2018, 2, 1), "value": 90},
+    //     {"date": new Date(2018, 2, 10), "value": 90},
+    //     {"date": new Date(2018, 2, 10), "value": 190},
+    //     {"date": new Date(2018, 2, 15), "value": 190},
+    //     {"date": new Date(2018, 2, 15), "value": 330},
+    //     {"date": new Date(2018, 3, 1), "value": 330}
+    // ]
 
     var svg = d3.select("svg")
         .attr("class", "axis");
