@@ -56,26 +56,23 @@ path {
     var parseTime = d3.timeParse("%Y-%m-%d");
 
     var startDay = parseTime("2018-01-01");
+    var endDay = parseTime("2018-03-31");
 
     var deposits = [
+        {"date": "2018-01-05", "value": -40},
         {"date": "2018-02-01", "value": 30},
         {"date": "2018-02-05", "value": 30},
         {"date": "2018-02-10", "value": 30},
         {"date": "2018-02-15", "value": 30},
         {"date": "2018-02-20", "value": -150},
         {"date": "2018-02-22", "value": -50},
-        {"date": "2018-03-01", "value": 120},
+        {"date": "2018-03-01", "value": 220},
+        {"date": "2018-03-04", "value": -20},
         {"date": "2018-03-10", "value": 120},
         {"date": "2018-03-15", "value": 120}
     ];
 
-    var prev = {"date": startDay, "value": 0};
-    var balances = deposits.flatMap(d => {
-        d.date = parseTime(d.date);
-        var x = {"date": d.date, "value": prev.value};
-        prev = {"date": d.date, "value": prev.value + d.value};
-        return [x, prev];
-    });
+    var balances = countBalances(deposits);
 
     console.log(deposits, balances);
 
@@ -89,10 +86,7 @@ path {
     var margin = 25;
     var axisHeight = height - 2 * margin;
 
-    var timeScale = createTimeScale(svg,
-        new Date(2018, 0, 1),
-        new Date(2018, 3, 1),
-        axisHeight);
+    var timeScale = createTimeScale(svg, startDay, endDay, axisHeight);
     var valueScale = createValueScale(svg);
 
     var oneDayHeight = timeScale(new Date(2000, 1, 2)) - timeScale(new Date(2000, 1, 1))
@@ -173,7 +167,7 @@ path {
 
     function createValueScale(svg) {
         var valueScale = d3.scaleLinear()
-            .domain([-1450, 1450])
+            .domain([-450, 450])
             .range([-middleWidth, middleWidth]);
         var valueAxis = d3.axisTop()
             .scale(valueScale)
@@ -182,6 +176,18 @@ path {
             .attr("transform", "translate(" + middleWidth + ", " + margin + ")")
             .call(valueAxis);
         return valueScale;
+    }
+
+    function countBalances(deposits) {
+        var prev = {"date": startDay, "value": 0};
+        var balances = deposits.flatMap(d => {
+            d.date = parseTime(d.date);
+            var x = {"date": d.date, "value": prev.value};
+            prev = {"date": d.date, "value": prev.value + d.value};
+            return [x, prev];
+        });
+        balances.push({"date": endDay, "value": prev.value})
+        return balances;
     }
 
 </script>
