@@ -2,15 +2,14 @@ d3.json("./config.json", function(config) {
     console.log(config);
 
     var parseTime = d3.timeParse(config.dateFormat);
-    var data = config.data;
+    var data = config.dataSets;
     var startDate = parseTime(config.startDate);
     var endDate = parseTime(config.endDate);
 
-    data.sortBy(d => {
-        return d.date;
-    });
-    data.forEach(d => {
-        d.date = parseTime(d.date);
+    data.forEach( ds => {
+        ds.values.forEach( dv => {
+            dv.date = parseTime(dv.date);
+        });
     });
 
     var tooltip = d3
@@ -48,10 +47,11 @@ d3.json("./config.json", function(config) {
     var line = d3.line()
         .x(function(d) { return x(d.date); })
         .y(function(d) { return y(d.value); });
-    svg.append("path")
-        //.style("stroke-dasharray", ("2, 2"))
-        .attr("d", line(data))
-        .attr("transform", "translate(" + margin.left + ", " + margin.top + ")");
+    data.forEach( ds => {
+        svg.append("path")
+            .attr("class", "result")
+            .attr("d", line(ds.values));
+    });
 
     // Add the x Axis
     svg.append("g")

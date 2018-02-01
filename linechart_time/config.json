@@ -1,0 +1,33 @@
+{
+  "dateFormat": "%Y-%m-%d",
+  "startDate": "2018-01-01",
+  "endDate": "2018-03-31",
+  "dataSets": [
+    {
+      "name": "one",
+      "values": [
+        {
+          "date": "2018-01-01",
+          "value": 5
+        },
+        {
+          "date": "2018-03-31",
+          "value": 0
+        }
+      ]
+    },
+    {
+      "name": "two",
+      "values": [
+        {
+          "date": "2018-01-01",
+          "value": 4
+        },
+        {
+          "date": "2018-03-31",
+          "value": 1
+        }
+      ]
+    }
+  ]
+}
