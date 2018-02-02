@@ -36,6 +36,7 @@ d3.json("./config.json", function(config) {
     var y = d3.scaleLinear()
         .domain([0, 5])
         .range([height, 0]);
+    var color = d3.scaleOrdinal(d3.schemeCategory20);
 
     // Append the svg object to the body of the page
     // Append a 'group' element to 'svg'
@@ -47,9 +48,10 @@ d3.json("./config.json", function(config) {
     var line = d3.line()
         .x(function(d) { return x(d.date); })
         .y(function(d) { return y(d.value); });
-    data.forEach( ds => {
+    data.forEach( (ds, idx) => {
         svg.append("path")
             .attr("class", "result")
+            .attr('stroke', color(idx))
             .attr("d", line(ds.values));
     });
 
