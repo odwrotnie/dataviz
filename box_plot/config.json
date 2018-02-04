@@ -1,0 +1,19 @@
+{
+  "min": 0,
+  "max": 100,
+  "lowerWhisker": 10,
+  "lowerQuartile": 20,
+  "median": 30,
+  "upperQuartile": 40,
+  "upperWhisker": 50,
+  "outliers": [
+    {
+      "name": "one",
+      "value": 5
+    },
+    {
+      "name": "one",
+      "value": 55
+    }
+  ]
+}

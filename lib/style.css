@@ -2,12 +2,19 @@ body {
     font: 8px sans-serif;
 }
 
+.box {
+    fill: none;
+    stroke: black;
+    stroke-width: 1px;
+    shape-rendering: crispEdges;
+}
+
 .bar {
     fill: steelblue;
 }
 
 path {
-    stroke-width: 1;
+    stroke-width: 1px;
     fill: none;
 }
 
@@ -18,18 +25,18 @@ path {
 .axis path,
 .axis line {
     fill: none;
-    stroke-width: 1;
+    stroke-width: 1px;
     shape-rendering: crispEdges;
 }
 
 .deposit {
     fill: lightgreen;
-    stroke-width:0
+    stroke-width: 0;
 }
 
 .debit {
     fill: orangered;
-    stroke-width:0
+    stroke-width: 0;
 }
 
 .tooltip {
