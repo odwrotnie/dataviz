@@ -24,36 +24,66 @@ d3.json("./config.json", function(config) {
         .domain([config.min, config.max])
         .range([0, width]);
     var y = d3.scaleLinear()
-        .domain([0, 5])
+        .domain([-5, 5])
         .range([height, 0]);
 
     var svg = svg
         .append("g")
         .attr("transform", "translate(" + margin.left + ", " + margin.top + ")");
 
-    svg.append("rect")
-        .attr("class", "box")
-        .attr("x", x(config.lowerQuartile))
-        .attr("y", y(4))
-        .attr("width", x(config.upperQuartile - config.lowerQuartile))
-        .attr("height", y(3));
+    function boxPlot(svg, y, height,
+                     xScale, yScale,
+                     median,
+                     lowerWhisker, upperWhisker,
+                     lowerQuartile, upperQuartile) {
+        var yOffsetScaled = yScale(y);
+        var heightScaled = yScale(0) - yScale(height);
+        svg.append("line") // CENTER LINE
+            .attr("class", "box")
+            .attr("x1", xScale(lowerWhisker))
+            .attr("y1", yOffsetScaled)
+            .attr("x2", xScale(upperWhisker))
+            .attr("y2", yOffsetScaled);
+        svg.append("line") // LOWER WHISKER
+            .attr("class", "box")
+            .attr("x1", xScale(lowerWhisker))
+            .attr("y1", yOffsetScaled - heightScaled / 2)
+            .attr("x2", xScale(lowerWhisker))
+            .attr("y2", yOffsetScaled + heightScaled / 2);
+        svg.append("line") // UPPER WHISKER
+            .attr("class", "box")
+            .attr("x1", xScale(upperWhisker))
+            .attr("y1", yOffsetScaled - heightScaled / 2)
+            .attr("x2", xScale(upperWhisker))
+            .attr("y2", yOffsetScaled + heightScaled / 2);
+        svg.append("rect") // BOX
+            .attr("class", "box")
+            .attr("x", xScale(lowerQuartile))
+            .attr("width", xScale(upperQuartile - lowerQuartile))
+            .attr("y", yOffsetScaled - heightScaled / 2)
+            .attr("height", heightScaled);
+        svg.append("line") // MEDIAN
+            .attr("class", "box")
+            .attr("x1", xScale(config.median))
+            .attr("y1", yOffsetScaled - heightScaled / 2)
+            .attr("x2", xScale(config.median))
+            .attr("y2", yOffsetScaled + heightScaled / 2);
+    }
 
-    // var line = d3.line()
-    //     .x(function(d) { return x(d.date); })
-    //     .y(function(d) { return y(d.value); });
-    // data.forEach( (ds, idx) => {
-    //     svg.append("path")
-    //         .attr("class", "result")
-    //         .attr('stroke', color(idx))
-    //         .attr("d", line(ds.values));
-    // });
-    //
-    // // Add the x Axis
-    // svg.append("g")
-    //     .attr("transform", "translate(0," + height + ")")
-    //     .call(d3.axisBottom(x));
-    //
-    // // Add the y Axis
-    // svg.append("g")
-    //     .call(d3.axisLeft(y));
+    boxPlot(svg, 0, 2.5,
+        x, y,
+        config.median,
+        config.lowerWhisker, config.upperWhisker,
+        config.lowerQuartile, config.upperQuartile);
+
+    // Add the x Axis
+    svg.append("g")
+        .attr("transform", "translate(0," + height + ")")
+        .call(d3.axisBottom(x));
+
+    // Add the y Axis
+    svg.append("g")
+        .call(d3.axisLeft(y));
+
+
 });

@@ -2,10 +2,10 @@
   "min": 0,
   "max": 100,
   "lowerWhisker": 10,
-  "lowerQuartile": 20,
-  "median": 30,
-  "upperQuartile": 40,
-  "upperWhisker": 50,
+  "lowerQuartile": 12,
+  "median": 16,
+  "upperQuartile": 25,
+  "upperWhisker": 35,
   "outliers": [
     {
       "name": "one",
