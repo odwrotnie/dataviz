@@ -26,6 +26,12 @@ d3.json("./config.json", function(config) {
                      lowerWhisker, upperWhisker,
                      lowerQuartile, upperQuartile,
                      outliers) {
+
+        if (median < lowerQuartile) throw "median < lowerQuartile";
+        if (median > upperQuartile) throw "median > upperQuartile";
+        if (lowerWhisker > lowerQuartile) throw "lowerWhisker > lowerQuartile";
+        if (lowerQuartile > upperWhisker) throw "lowerQuartile > upperWhisker";
+
         var yOffsetScaled = yScale(y);
         var heightScaled = yScale(0) - yScale(height);
         svg.append("line") // CENTER LINE
