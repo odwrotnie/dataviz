@@ -33,6 +33,7 @@ d3.json("./config.json", function(config) {
         if (error) throw error;
 
         d3.timeFormatDefaultLocale(locale);
+        var dateTimeFormat = d3.timeFormat(locale.dateTime);
 
         var yAxisOffset = 60;
 
@@ -85,7 +86,7 @@ d3.json("./config.json", function(config) {
                             .attr("alignment-baseline", "central")
                             .attr("transform", "translate(" + (x(d.date) + 5) + ", " + (y(d.value)) + ")");
                         g.g.append("text")
-                            .text(d.date)
+                            .text(dateTimeFormat(d.date))
                             .attr("class", deleteClass)
                             .attr("text-anchor", "end")
                             .attr("alignment-baseline", "central")
