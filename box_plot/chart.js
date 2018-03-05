@@ -49,7 +49,7 @@ d3.json("./config.json", function(config) {
         svg.append("rect") // BOX
             .attr("class", "box")
             .attr("x", xScale(lowerQuartile))
-            .attr("width", xScale(upperQuartile - lowerQuartile))
+            .attr("width", xScale(upperQuartile) - xScale(lowerQuartile))
             .attr("y", yOffsetScaled - heightScaled / 2)
             .attr("height", heightScaled);
         svg.append("line") // MEDIAN
@@ -73,7 +73,7 @@ d3.json("./config.json", function(config) {
         config.median,
         config.lowerWhisker, config.upperWhisker,
         config.lowerQuartile, config.upperQuartile,
-        [1, 2, 41, 42, 50]);
+        config.outliers);
 
     // Add the x Axis
     svg.append("g")

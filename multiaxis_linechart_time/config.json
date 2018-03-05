@@ -92,8 +92,27 @@
     {
       "name": "three",
       "min": 0,
-      "max": 100,
-      "dataSets": []
+      "max": 100000,
+      "dataSets": [
+        {
+          "name": "one",
+          "values": [
+            {
+              "date": "2018-01-01",
+              "value": 58888
+            },
+            {
+              "date": "2018-02-15",
+              "value": 88888
+            },
+            {
+              "date": "2018-03-31",
+              "value": 10000
+            }
+          ],
+          "correlation": [6, 0]
+        }
+      ]
     }
   ]
 }

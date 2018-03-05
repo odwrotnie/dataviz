@@ -6,14 +6,5 @@
   "median": 16,
   "upperQuartile": 25,
   "upperWhisker": 35,
-  "outliers": [
-    {
-      "name": "one",
-      "value": 5
-    },
-    {
-      "name": "one",
-      "value": 55
-    }
-  ]
+  "outliers": [7, 8, 9, 36, 37, 38]
 }
