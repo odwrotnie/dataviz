@@ -4,13 +4,16 @@ d3.json("./config.json", function(config) {
 
     var svg = d3.select("svg");
 
+    var MIN = Math.min(config.min, config.lowerWhisker);
+    var MAX = Math.max(config.max, config.upperWhisker);
+
     var margin = {top: 20, right: 20, bottom: 30, left: 40},
         width = +svg.attr("width") - margin.left - margin.right,
         height = +svg.attr("height") - margin.top - margin.bottom;
 
     // Set the scales
     var x = d3.scaleLinear()
-        .domain([config.min, config.max])
+        .domain([MIN, MAX])
         .range([0, width]);
     var y = d3.scaleLinear()
         .domain([-1, 1])
@@ -34,6 +37,7 @@ d3.json("./config.json", function(config) {
 
         var yOffsetScaled = yScale(y);
         var heightScaled = yScale(0) - yScale(height);
+
         svg.append("line") // CENTER LINE
             .attr("class", "box")
             .attr("x1", xScale(lowerWhisker))
