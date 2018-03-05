@@ -44,17 +44,14 @@ d3.json("./config.json", function(config) {
                     .on("mouseout", function() {
                         //console.log("Mouse out domain: " + domainName);
                         d3.selectAll("." + zoomClass)
-                            .transition().duration(5000).attr("opacity", 1);
-                            .transition().duration(100).attr("stroke-width", 1);
+                            .transition().duration(100).attr("opacity", 1);
                     })
                     .on("mouseover", function() {
                         //console.log("Mouse over domain: " + y());
                         d3.selectAll("." + zoomClass)
-                            .transition().duration(1000)
-                            .attr("opacity", 0.3);
+                            .transition().duration(100).attr("opacity", 0.3);
                         d3.selectAll("." + domainClass)
-                            .transition().duration(100).attr("opacity", 1)
-                            .transition().duration(100).attr("stroke-width", 3);
+                            .transition().duration(100).attr("opacity", 1);
                     });
             });
         });
