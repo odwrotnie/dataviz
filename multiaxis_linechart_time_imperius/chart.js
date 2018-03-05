@@ -32,6 +32,9 @@ d3.json("./config.json", function(config) {
     d3.json("../lib/d3-time-format.json", function(error, locale) { // https://unpkg.com/d3-time-format@2/locale/pl-PL.json
         if (error) throw error;
 
+
+        var dotSize = 2;
+
         d3.timeFormatDefaultLocale(locale);
         var dateTimeFormat = d3.timeFormat(locale.dateTime);
 
@@ -66,7 +69,7 @@ d3.json("./config.json", function(config) {
                     .attr("cx", function (d) { return x(d.date); })
                     .attr("cy", function (d) { return y(d.value); })
                     .attr('fill', color(colorIndex++))
-                    .attr("r", 4)
+                    .attr("r", dotSize)
                     .on("mouseout", function() {
                         //console.log("Mouse out domain: " + domainName);
                         d3.selectAll("." + zoomClass)
