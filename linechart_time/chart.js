@@ -1,7 +1,7 @@
 d3.json("./config.json", function(config) {
     console.log(config);
 
-    d3.json("https://unpkg.com/d3-time-format@2/locale/pl-PL.json", function(error, locale) {
+    d3.json("../lib/d3-time-format.json", function(error, locale) { // https://unpkg.com/d3-time-format@2/locale/pl-PL.json
         if (error) throw error;
 
         d3.timeFormatDefaultLocale(locale);

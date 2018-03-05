@@ -1,6 +1,6 @@
 {
   "min": 0,
-  "max": 100,
+  "max": 60,
   "lowerWhisker": 10,
   "lowerQuartile": 12,
   "median": 16,

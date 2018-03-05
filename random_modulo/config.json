@@ -1,0 +1,17 @@
+{
+  "bets": [
+    {"owner": "Player 1"},
+    {"owner": "Player 2"},
+    {"owner": "Player 3"},
+    {"owner": "Player 2"},
+    {"owner": "Player 2"},
+    {"owner": "Player 1"},
+    {"owner": "Player 4"},
+    {"owner": "Player 5"},
+    {"owner": "Player 3"},
+    {"owner": "Player 3"},
+    {"owner": "Player 3"},
+    {"owner": "Player 2"},
+    {"owner": "Player 1"}
+  ]
+}

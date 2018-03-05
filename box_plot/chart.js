@@ -2,17 +2,6 @@ d3.json("./config.json", function(config) {
     console.log("Config:");
     console.log(config);
 
-    var tooltip = d3
-        .select("body")
-        .append("div")
-        .attr("class", "tooltip");
-
-    tooltip
-        .style("position", "absolute")
-        .style("z-index", "10")
-        .style("visibility", "hidden")
-        .text("a simple tooltip");
-
     var svg = d3.select("svg");
 
     var margin = {top: 20, right: 20, bottom: 30, left: 40},
@@ -24,7 +13,7 @@ d3.json("./config.json", function(config) {
         .domain([config.min, config.max])
         .range([0, width]);
     var y = d3.scaleLinear()
-        .domain([-5, 5])
+        .domain([-1, 1])
         .range([height, 0]);
 
     var svg = svg
@@ -35,7 +24,8 @@ d3.json("./config.json", function(config) {
                      xScale, yScale,
                      median,
                      lowerWhisker, upperWhisker,
-                     lowerQuartile, upperQuartile) {
+                     lowerQuartile, upperQuartile,
+                     outliers) {
         var yOffsetScaled = yScale(y);
         var heightScaled = yScale(0) - yScale(height);
         svg.append("line") // CENTER LINE
@@ -68,22 +58,29 @@ d3.json("./config.json", function(config) {
             .attr("y1", yOffsetScaled - heightScaled / 2)
             .attr("x2", xScale(config.median))
             .attr("y2", yOffsetScaled + heightScaled / 2);
+        svg.selectAll("circle") // OUTLIERS
+            .data(outliers)
+            .enter()
+            .append("circle")
+            .attr("class", "box-outlier")
+            .attr("cx", function (d) { return xScale(d); })
+            .attr("cy", function (d) { return yScale(0); })
+            .attr("r", function (d) { return 4; });
     }
 
-    boxPlot(svg, 0, 2.5,
+    boxPlot(svg, 0, 1,
         x, y,
         config.median,
         config.lowerWhisker, config.upperWhisker,
-        config.lowerQuartile, config.upperQuartile);
+        config.lowerQuartile, config.upperQuartile,
+        [1, 2, 41, 42, 50]);
 
     // Add the x Axis
     svg.append("g")
-        .attr("transform", "translate(0," + height + ")")
+        .attr("transform", "translate(0," + y(0) + ")")
         .call(d3.axisBottom(x));
 
     // Add the y Axis
-    svg.append("g")
-        .call(d3.axisLeft(y));
-
-
+    // svg.append("g")
+    //     .call(d3.axisLeft(y));
 });
