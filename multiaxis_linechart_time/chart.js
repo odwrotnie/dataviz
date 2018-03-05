@@ -40,11 +40,19 @@ d3.json("./config.json", function(config) {
                 g.g.append("path") // PLOT
                     .attr("class", zoomClass + " " + domainClass)
                     .attr('stroke', color(domainIndex + dataSetIndex))
-                    .attr("d", line(ds.values))
+                    .attr("d", line(ds.values));
+                g.g.selectAll(domainName)
+                    .data(ds.values)
+                    .enter()
+                    .append("circle")
+                    .attr("cx", function (d) { return x(d.date); })
+                    .attr("cy", function (d) { return y(d.value); })
+                    .attr('fill', color(domainIndex + dataSetIndex))
+                    .attr("r", 4)
                     .on("mouseout", function() {
                         //console.log("Mouse out domain: " + domainName);
                         d3.selectAll("." + zoomClass)
-                            .transition().duration(100).attr("opacity", 1);
+                            .transition().duration(1000).attr("opacity", 1);
                     })
                     .on("mouseover", function() {
                         //console.log("Mouse over domain: " + y());
