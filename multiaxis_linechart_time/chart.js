@@ -26,7 +26,7 @@ d3.json("./config.json", function(config) {
         var x = xScaleAndDraw(g.g, g.width, g.height);
         var color = d3.scaleOrdinal(d3.schemeCategory20);
 
-        var opacityClass = "opacity";
+        var deleteClass = "delete";
         var zoomClass = "zoom";
 
         var colorIndex = 0;
@@ -55,8 +55,7 @@ d3.json("./config.json", function(config) {
                         //console.log("Mouse out domain: " + domainName);
                         d3.selectAll("." + zoomClass)
                             .transition().duration(1000).attr("opacity", 1);
-                        d3.selectAll("text")
-                            .filter("." + zoomClass)
+                        d3.selectAll("." + deleteClass)
                             .remove();
                     })
                     .on("mouseover", function(d) {
@@ -67,12 +66,12 @@ d3.json("./config.json", function(config) {
                             .transition().duration(100).attr("opacity", 1);
                         g.g.append("text")
                             .text(d.value)
-                            .attr("class", zoomClass)
+                            .attr("class", deleteClass)
                             .attr("alignment-baseline", "central")
                             .attr("transform", "translate(" + (x(d.date) + 5) + ", " + (y(d.value)) + ")");
                         g.g.append("text")
                             .text(d.date)
-                            .attr("class", zoomClass)
+                            .attr("class", deleteClass)
                             .attr("text-anchor", "end")
                             .attr("alignment-baseline", "central")
                             .attr("transform", "translate(" + (x(d.date) - 5) + ", " + (y(d.value)) + ")");
