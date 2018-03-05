@@ -65,7 +65,7 @@ d3.json("./config.json", function(config) {
             .attr("class", "box-outlier")
             .attr("cx", function (d) { return xScale(d); })
             .attr("cy", function (d) { return yScale(0); })
-            .attr("r", function (d) { return 4; });
+            .attr("r", function (d) { return 2; });
     }
 
     boxPlot(svg, 0, 1,
@@ -77,7 +77,7 @@ d3.json("./config.json", function(config) {
 
     // Add the x Axis
     svg.append("g")
-        .attr("transform", "translate(0," + y(0) + ")")
+        .attr("transform", "translate(0," + height + ")")
         .call(d3.axisBottom(x));
 
     // Add the y Axis

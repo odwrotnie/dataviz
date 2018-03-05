@@ -4,15 +4,15 @@ body {
 
 .box {
     fill: white;
-    stroke: orangered;
-    stroke-width: 3px;
+    stroke: black;
+    stroke-width: 2px;
     shape-rendering: crispEdges;
 }
 
 .box-outlier {
     fill: none;
-    stroke: orangered;
-    stroke-width: 3px;
+    stroke: black;
+    stroke-width: 2px;
 }
 
 .bar {
