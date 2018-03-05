@@ -1,0 +1,99 @@
+{
+  "dateFormat": "%Y-%m-%d",
+  "startDate": "2018-01-01",
+  "endDate": "2018-03-31",
+  "domains": [
+    {
+      "name": "one",
+      "min": 0,
+      "max": 5,
+      "dataSets": [
+        {
+          "name": "one",
+          "values": [
+            {
+              "date": "2018-01-01",
+              "value": 5
+            },
+            {
+              "date": "2018-02-15",
+              "value": 4
+            },
+            {
+              "date": "2018-03-31",
+              "value": 0
+            }
+          ],
+          "correlation": [6, 0]
+        },
+        {
+          "name": "two",
+          "values": [
+            {
+              "date": "2018-01-01",
+              "value": 4
+            },
+            {
+              "date": "2018-02-15",
+              "value": 1
+            },
+            {
+              "date": "2018-03-31",
+              "value": 0
+            }
+          ],
+          "correlation": [3, 1]
+        }
+      ]
+    },
+    {
+      "name": "two",
+      "min": 0,
+      "max": 50,
+      "dataSets": [
+        {
+          "name": "one",
+          "values": [
+            {
+              "date": "2018-01-01",
+              "value": 35
+            },
+            {
+              "date": "2018-02-15",
+              "value": 27
+            },
+            {
+              "date": "2018-03-31",
+              "value": 12
+            }
+          ],
+          "correlation": [6, 0]
+        },
+        {
+          "name": "two",
+          "values": [
+            {
+              "date": "2018-01-01",
+              "value": 39
+            },
+            {
+              "date": "2018-02-15",
+              "value": 50
+            },
+            {
+              "date": "2018-03-31",
+              "value": 50
+            }
+          ],
+          "correlation": [3, 1]
+        }
+      ]
+    },
+    {
+      "name": "three",
+      "min": 0,
+      "max": 100,
+      "dataSets": []
+    }
+  ]
+}
