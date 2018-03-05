@@ -29,6 +29,8 @@ d3.json("./config.json", function(config) {
         var opacityClass = "opacity";
         var zoomClass = "zoom";
 
+        var colorIndex = 0;
+
         domains.forEach((domain, domainIndex) => { // DOMAINS
             var domainName = domain.name;
             var domainClass = "domain-" + domainName;
@@ -39,7 +41,7 @@ d3.json("./config.json", function(config) {
             domain.dataSets.forEach( (ds, dataSetIndex) => {
                 g.g.append("path") // PLOT
                     .attr("class", zoomClass + " " + domainClass)
-                    .attr('stroke', color(domainIndex + dataSetIndex))
+                    .attr('stroke', color(colorIndex))
                     .attr("d", line(ds.values));
                 g.g.selectAll(domainName)
                     .data(ds.values)
@@ -47,19 +49,33 @@ d3.json("./config.json", function(config) {
                     .append("circle")
                     .attr("cx", function (d) { return x(d.date); })
                     .attr("cy", function (d) { return y(d.value); })
-                    .attr('fill', color(domainIndex + dataSetIndex))
+                    .attr('fill', color(colorIndex++))
                     .attr("r", 4)
                     .on("mouseout", function() {
                         //console.log("Mouse out domain: " + domainName);
                         d3.selectAll("." + zoomClass)
                             .transition().duration(1000).attr("opacity", 1);
+                        d3.selectAll("text")
+                            .filter("." + zoomClass)
+                            .remove();
                     })
-                    .on("mouseover", function() {
+                    .on("mouseover", function(d) {
                         //console.log("Mouse over domain: " + y());
                         d3.selectAll("." + zoomClass)
                             .transition().duration(100).attr("opacity", 0.3);
                         d3.selectAll("." + domainClass)
                             .transition().duration(100).attr("opacity", 1);
+                        g.g.append("text")
+                            .text(d.value)
+                            .attr("class", zoomClass)
+                            .attr("alignment-baseline", "central")
+                            .attr("transform", "translate(" + (x(d.date) + 5) + ", " + (y(d.value)) + ")");
+                        g.g.append("text")
+                            .text(d.date)
+                            .attr("class", zoomClass)
+                            .attr("text-anchor", "end")
+                            .attr("alignment-baseline", "central")
+                            .attr("transform", "translate(" + (x(d.date) - 5) + ", " + (y(d.value)) + ")");
                     });
             });
         });
@@ -68,7 +84,7 @@ d3.json("./config.json", function(config) {
 
         function svgTranslatedG(domainsCount) {
             var svg = d3.select("svg");
-            var margin = {top: 20, right: 20, bottom: 30, left: (domainsCount * yAxisOffset)},
+            var margin = {top: 20, right: 60, bottom: 30, left: (domainsCount * yAxisOffset)},
                 width = +svg.attr("width") - margin.left - margin.right,
                 height = +svg.attr("height") - margin.top - margin.bottom;
             var g = svg
