@@ -1,0 +1,967 @@
+{
+  "count": 1582,
+  "next": "http://imperius.io/api-reports/operational-reports-values/?page=2&report=1",
+  "previous": null,
+  "results": [
+    {
+      "id": 3189,
+      "parameter": {
+        "id": 1164,
+        "name": "Tco",
+        "desc": "OG2 (parter) T rzecz. zasila. 1",
+        "facilities": [
+          "Siedziba PROMAR"
+        ],
+        "unit": {
+          "id": 67,
+          "name": "Temperatura centralnego ogrzewania",
+          "symbol": "°C",
+          "type": 2,
+          "min_show_value": "",
+          "max_show_value": ""
+        },
+        "pmc": "PMC1180"
+      },
+      "timestamp": "2018-02-01T00:00:00",
+      "avg": 30.35,
+      "count": 20.0,
+      "min": 29.0,
+      "max": 33.0,
+      "std_dev": 1.31434394280949,
+      "sum": 607.0,
+      "variance": 1.7275,
+      "report": 1,
+      "object": null,
+      "client": null,
+      "device": null
+    },
+    {
+      "id": 3188,
+      "parameter": {
+        "id": 1181,
+        "name": "Og3-temp-zew",
+        "desc": "Og3-temp-zew",
+        "facilities": [
+          "Siedziba PROMAR"
+        ],
+        "unit": {
+          "id": 46,
+          "name": "Temperatura zewnętrzna",
+          "symbol": "°C",
+          "type": 2,
+          "min_show_value": "",
+          "max_show_value": ""
+        },
+        "pmc": "PMC1180"
+      },
+      "timestamp": "2018-02-01T00:00:00",
+      "avg": 60.0,
+      "count": 20.0,
+      "min": 60.0,
+      "max": 60.0,
+      "std_dev": 0.0,
+      "sum": 1200.0,
+      "variance": 0.0,
+      "report": 1,
+      "object": null,
+      "client": null,
+      "device": null
+    },
+    {
+      "id": 3191,
+      "parameter": {
+        "id": 1164,
+        "name": "Tco",
+        "desc": "OG2 (parter) T rzecz. zasila. 1",
+        "facilities": [
+          "Siedziba PROMAR"
+        ],
+        "unit": {
+          "id": 67,
+          "name": "Temperatura centralnego ogrzewania",
+          "symbol": "°C",
+          "type": 2,
+          "min_show_value": "",
+          "max_show_value": ""
+        },
+        "pmc": "PMC1180"
+      },
+      "timestamp": "2018-02-01T01:00:00",
+      "avg": 29.6,
+      "count": 20.0,
+      "min": 28.0,
+      "max": 32.0,
+      "std_dev": 1.06770782520313,
+      "sum": 592.0,
+      "variance": 1.14,
+      "report": 1,
+      "object": null,
+      "client": null,
+      "device": null
+    },
+    {
+      "id": 3190,
+      "parameter": {
+        "id": 1181,
+        "name": "Og3-temp-zew",
+        "desc": "Og3-temp-zew",
+        "facilities": [
+          "Siedziba PROMAR"
+        ],
+        "unit": {
+          "id": 46,
+          "name": "Temperatura zewnętrzna",
+          "symbol": "°C",
+          "type": 2,
+          "min_show_value": "",
+          "max_show_value": ""
+        },
+        "pmc": "PMC1180"
+      },
+      "timestamp": "2018-02-01T01:00:00",
+      "avg": 60.0,
+      "count": 20.0,
+      "min": 60.0,
+      "max": 60.0,
+      "std_dev": 0.0,
+      "sum": 1200.0,
+      "variance": 0.0,
+      "report": 1,
+      "object": null,
+      "client": null,
+      "device": null
+    },
+    {
+      "id": 3193,
+      "parameter": {
+        "id": 1164,
+        "name": "Tco",
+        "desc": "OG2 (parter) T rzecz. zasila. 1",
+        "facilities": [
+          "Siedziba PROMAR"
+        ],
+        "unit": {
+          "id": 67,
+          "name": "Temperatura centralnego ogrzewania",
+          "symbol": "°C",
+          "type": 2,
+          "min_show_value": "",
+          "max_show_value": ""
+        },
+        "pmc": "PMC1180"
+      },
+      "timestamp": "2018-02-01T02:00:00",
+      "avg": 30.5,
+      "count": 20.0,
+      "min": 29.0,
+      "max": 34.0,
+      "std_dev": 1.28452325786651,
+      "sum": 610.0,
+      "variance": 1.65,
+      "report": 1,
+      "object": null,
+      "client": null,
+      "device": null
+    },
+    {
+      "id": 3192,
+      "parameter": {
+        "id": 1181,
+        "name": "Og3-temp-zew",
+        "desc": "Og3-temp-zew",
+        "facilities": [
+          "Siedziba PROMAR"
+        ],
+        "unit": {
+          "id": 46,
+          "name": "Temperatura zewnętrzna",
+          "symbol": "°C",
+          "type": 2,
+          "min_show_value": "",
+          "max_show_value": ""
+        },
+        "pmc": "PMC1180"
+      },
+      "timestamp": "2018-02-01T02:00:00",
+      "avg": 60.0,
+      "count": 20.0,
+      "min": 60.0,
+      "max": 60.0,
+      "std_dev": 0.0,
+      "sum": 1200.0,
+      "variance": 0.0,
+      "report": 1,
+      "object": null,
+      "client": null,
+      "device": null
+    },
+    {
+      "id": 3194,
+      "parameter": {
+        "id": 1181,
+        "name": "Og3-temp-zew",
+        "desc": "Og3-temp-zew",
+        "facilities": [
+          "Siedziba PROMAR"
+        ],
+        "unit": {
+          "id": 46,
+          "name": "Temperatura zewnętrzna",
+          "symbol": "°C",
+          "type": 2,
+          "min_show_value": "",
+          "max_show_value": ""
+        },
+        "pmc": "PMC1180"
+      },
+      "timestamp": "2018-02-01T03:00:00",
+      "avg": 60.0,
+      "count": 20.0,
+      "min": 60.0,
+      "max": 60.0,
+      "std_dev": 0.0,
+      "sum": 1200.0,
+      "variance": 0.0,
+      "report": 1,
+      "object": null,
+      "client": null,
+      "device": null
+    },
+    {
+      "id": 3195,
+      "parameter": {
+        "id": 1164,
+        "name": "Tco",
+        "desc": "OG2 (parter) T rzecz. zasila. 1",
+        "facilities": [
+          "Siedziba PROMAR"
+        ],
+        "unit": {
+          "id": 67,
+          "name": "Temperatura centralnego ogrzewania",
+          "symbol": "°C",
+          "type": 2,
+          "min_show_value": "",
+          "max_show_value": ""
+        },
+        "pmc": "PMC1180"
+      },
+      "timestamp": "2018-02-01T03:00:00",
+      "avg": 29.9,
+      "count": 20.0,
+      "min": 29.0,
+      "max": 30.0,
+      "std_dev": 0.3,
+      "sum": 598.0,
+      "variance": 0.09,
+      "report": 1,
+      "object": null,
+      "client": null,
+      "device": null
+    },
+    {
+      "id": 3197,
+      "parameter": {
+        "id": 1164,
+        "name": "Tco",
+        "desc": "OG2 (parter) T rzecz. zasila. 1",
+        "facilities": [
+          "Siedziba PROMAR"
+        ],
+        "unit": {
+          "id": 67,
+          "name": "Temperatura centralnego ogrzewania",
+          "symbol": "°C",
+          "type": 2,
+          "min_show_value": "",
+          "max_show_value": ""
+        },
+        "pmc": "PMC1180"
+      },
+      "timestamp": "2018-02-01T04:00:00",
+      "avg": 30.0,
+      "count": 20.0,
+      "min": 30.0,
+      "max": 30.0,
+      "std_dev": 0.0,
+      "sum": 600.0,
+      "variance": 0.0,
+      "report": 1,
+      "object": null,
+      "client": null,
+      "device": null
+    },
+    {
+      "id": 3196,
+      "parameter": {
+        "id": 1181,
+        "name": "Og3-temp-zew",
+        "desc": "Og3-temp-zew",
+        "facilities": [
+          "Siedziba PROMAR"
+        ],
+        "unit": {
+          "id": 46,
+          "name": "Temperatura zewnętrzna",
+          "symbol": "°C",
+          "type": 2,
+          "min_show_value": "",
+          "max_show_value": ""
+        },
+        "pmc": "PMC1180"
+      },
+      "timestamp": "2018-02-01T04:00:00",
+      "avg": 60.0,
+      "count": 20.0,
+      "min": 60.0,
+      "max": 60.0,
+      "std_dev": 0.0,
+      "sum": 1200.0,
+      "variance": 0.0,
+      "report": 1,
+      "object": null,
+      "client": null,
+      "device": null
+    },
+    {
+      "id": 3198,
+      "parameter": {
+        "id": 1181,
+        "name": "Og3-temp-zew",
+        "desc": "Og3-temp-zew",
+        "facilities": [
+          "Siedziba PROMAR"
+        ],
+        "unit": {
+          "id": 46,
+          "name": "Temperatura zewnętrzna",
+          "symbol": "°C",
+          "type": 2,
+          "min_show_value": "",
+          "max_show_value": ""
+        },
+        "pmc": "PMC1180"
+      },
+      "timestamp": "2018-02-01T05:00:00",
+      "avg": 60.0,
+      "count": 20.0,
+      "min": 60.0,
+      "max": 60.0,
+      "std_dev": 0.0,
+      "sum": 1200.0,
+      "variance": 0.0,
+      "report": 1,
+      "object": null,
+      "client": null,
+      "device": null
+    },
+    {
+      "id": 3199,
+      "parameter": {
+        "id": 1164,
+        "name": "Tco",
+        "desc": "OG2 (parter) T rzecz. zasila. 1",
+        "facilities": [
+          "Siedziba PROMAR"
+        ],
+        "unit": {
+          "id": 67,
+          "name": "Temperatura centralnego ogrzewania",
+          "symbol": "°C",
+          "type": 2,
+          "min_show_value": "",
+          "max_show_value": ""
+        },
+        "pmc": "PMC1180"
+      },
+      "timestamp": "2018-02-01T05:00:00",
+      "avg": 36.95,
+      "count": 20.0,
+      "min": 30.0,
+      "max": 42.0,
+      "std_dev": 5.1329815896806,
+      "sum": 739.0,
+      "variance": 26.3475,
+      "report": 1,
+      "object": null,
+      "client": null,
+      "device": null
+    },
+    {
+      "id": 3201,
+      "parameter": {
+        "id": 1164,
+        "name": "Tco",
+        "desc": "OG2 (parter) T rzecz. zasila. 1",
+        "facilities": [
+          "Siedziba PROMAR"
+        ],
+        "unit": {
+          "id": 67,
+          "name": "Temperatura centralnego ogrzewania",
+          "symbol": "°C",
+          "type": 2,
+          "min_show_value": "",
+          "max_show_value": ""
+        },
+        "pmc": "PMC1180"
+      },
+      "timestamp": "2018-02-01T06:00:00",
+      "avg": 40.7,
+      "count": 20.0,
+      "min": 40.0,
+      "max": 41.0,
+      "std_dev": 0.458257569495584,
+      "sum": 814.0,
+      "variance": 0.21,
+      "report": 1,
+      "object": null,
+      "client": null,
+      "device": null
+    },
+    {
+      "id": 3200,
+      "parameter": {
+        "id": 1181,
+        "name": "Og3-temp-zew",
+        "desc": "Og3-temp-zew",
+        "facilities": [
+          "Siedziba PROMAR"
+        ],
+        "unit": {
+          "id": 46,
+          "name": "Temperatura zewnętrzna",
+          "symbol": "°C",
+          "type": 2,
+          "min_show_value": "",
+          "max_show_value": ""
+        },
+        "pmc": "PMC1180"
+      },
+      "timestamp": "2018-02-01T06:00:00",
+      "avg": 55.0,
+      "count": 20.0,
+      "min": 50.0,
+      "max": 60.0,
+      "std_dev": 5.0,
+      "sum": 1100.0,
+      "variance": 25.0,
+      "report": 1,
+      "object": null,
+      "client": null,
+      "device": null
+    },
+    {
+      "id": 3203,
+      "parameter": {
+        "id": 1164,
+        "name": "Tco",
+        "desc": "OG2 (parter) T rzecz. zasila. 1",
+        "facilities": [
+          "Siedziba PROMAR"
+        ],
+        "unit": {
+          "id": 67,
+          "name": "Temperatura centralnego ogrzewania",
+          "symbol": "°C",
+          "type": 2,
+          "min_show_value": "",
+          "max_show_value": ""
+        },
+        "pmc": "PMC1180"
+      },
+      "timestamp": "2018-02-01T07:00:00",
+      "avg": 41.0,
+      "count": 20.0,
+      "min": 41.0,
+      "max": 41.0,
+      "std_dev": 0.0,
+      "sum": 820.0,
+      "variance": 0.0,
+      "report": 1,
+      "object": null,
+      "client": null,
+      "device": null
+    },
+    {
+      "id": 3202,
+      "parameter": {
+        "id": 1181,
+        "name": "Og3-temp-zew",
+        "desc": "Og3-temp-zew",
+        "facilities": [
+          "Siedziba PROMAR"
+        ],
+        "unit": {
+          "id": 46,
+          "name": "Temperatura zewnętrzna",
+          "symbol": "°C",
+          "type": 2,
+          "min_show_value": "",
+          "max_show_value": ""
+        },
+        "pmc": "PMC1180"
+      },
+      "timestamp": "2018-02-01T07:00:00",
+      "avg": 50.0,
+      "count": 20.0,
+      "min": 50.0,
+      "max": 50.0,
+      "std_dev": 0.0,
+      "sum": 1000.0,
+      "variance": 0.0,
+      "report": 1,
+      "object": null,
+      "client": null,
+      "device": null
+    },
+    {
+      "id": 3204,
+      "parameter": {
+        "id": 1181,
+        "name": "Og3-temp-zew",
+        "desc": "Og3-temp-zew",
+        "facilities": [
+          "Siedziba PROMAR"
+        ],
+        "unit": {
+          "id": 46,
+          "name": "Temperatura zewnętrzna",
+          "symbol": "°C",
+          "type": 2,
+          "min_show_value": "",
+          "max_show_value": ""
+        },
+        "pmc": "PMC1180"
+      },
+      "timestamp": "2018-02-01T08:00:00",
+      "avg": 50.0,
+      "count": 16.0,
+      "min": 50.0,
+      "max": 50.0,
+      "std_dev": 0.0,
+      "sum": 800.0,
+      "variance": 0.0,
+      "report": 1,
+      "object": null,
+      "client": null,
+      "device": null
+    },
+    {
+      "id": 3205,
+      "parameter": {
+        "id": 1164,
+        "name": "Tco",
+        "desc": "OG2 (parter) T rzecz. zasila. 1",
+        "facilities": [
+          "Siedziba PROMAR"
+        ],
+        "unit": {
+          "id": 67,
+          "name": "Temperatura centralnego ogrzewania",
+          "symbol": "°C",
+          "type": 2,
+          "min_show_value": "",
+          "max_show_value": ""
+        },
+        "pmc": "PMC1180"
+      },
+      "timestamp": "2018-02-01T08:00:00",
+      "avg": 40.0,
+      "count": 16.0,
+      "min": 37.0,
+      "max": 41.0,
+      "std_dev": 1.73205080756888,
+      "sum": 640.0,
+      "variance": 3.0,
+      "report": 1,
+      "object": null,
+      "client": null,
+      "device": null
+    },
+    {
+      "id": 3206,
+      "parameter": {
+        "id": 1181,
+        "name": "Og3-temp-zew",
+        "desc": "Og3-temp-zew",
+        "facilities": [
+          "Siedziba PROMAR"
+        ],
+        "unit": {
+          "id": 46,
+          "name": "Temperatura zewnętrzna",
+          "symbol": "°C",
+          "type": 2,
+          "min_show_value": "",
+          "max_show_value": ""
+        },
+        "pmc": "PMC1180"
+      },
+      "timestamp": "2018-02-01T09:00:00",
+      "avg": 55.5,
+      "count": 20.0,
+      "min": 50.0,
+      "max": 60.0,
+      "std_dev": 4.9749371855331,
+      "sum": 1110.0,
+      "variance": 24.75,
+      "report": 1,
+      "object": null,
+      "client": null,
+      "device": null
+    },
+    {
+      "id": 3207,
+      "parameter": {
+        "id": 1164,
+        "name": "Tco",
+        "desc": "OG2 (parter) T rzecz. zasila. 1",
+        "facilities": [
+          "Siedziba PROMAR"
+        ],
+        "unit": {
+          "id": 67,
+          "name": "Temperatura centralnego ogrzewania",
+          "symbol": "°C",
+          "type": 2,
+          "min_show_value": "",
+          "max_show_value": ""
+        },
+        "pmc": "PMC1180"
+      },
+      "timestamp": "2018-02-01T09:00:00",
+      "avg": 37.2,
+      "count": 20.0,
+      "min": 37.0,
+      "max": 38.0,
+      "std_dev": 0.4,
+      "sum": 744.0,
+      "variance": 0.16,
+      "report": 1,
+      "object": null,
+      "client": null,
+      "device": null
+    },
+    {
+      "id": 3209,
+      "parameter": {
+        "id": 1164,
+        "name": "Tco",
+        "desc": "OG2 (parter) T rzecz. zasila. 1",
+        "facilities": [
+          "Siedziba PROMAR"
+        ],
+        "unit": {
+          "id": 67,
+          "name": "Temperatura centralnego ogrzewania",
+          "symbol": "°C",
+          "type": 2,
+          "min_show_value": "",
+          "max_show_value": ""
+        },
+        "pmc": "PMC1180"
+      },
+      "timestamp": "2018-02-01T10:00:00",
+      "avg": 37.0,
+      "count": 20.0,
+      "min": 37.0,
+      "max": 37.0,
+      "std_dev": 0.0,
+      "sum": 740.0,
+      "variance": 0.0,
+      "report": 1,
+      "object": null,
+      "client": null,
+      "device": null
+    },
+    {
+      "id": 3208,
+      "parameter": {
+        "id": 1181,
+        "name": "Og3-temp-zew",
+        "desc": "Og3-temp-zew",
+        "facilities": [
+          "Siedziba PROMAR"
+        ],
+        "unit": {
+          "id": 46,
+          "name": "Temperatura zewnętrzna",
+          "symbol": "°C",
+          "type": 2,
+          "min_show_value": "",
+          "max_show_value": ""
+        },
+        "pmc": "PMC1180"
+      },
+      "timestamp": "2018-02-01T10:00:00",
+      "avg": 60.0,
+      "count": 20.0,
+      "min": 60.0,
+      "max": 60.0,
+      "std_dev": 0.0,
+      "sum": 1200.0,
+      "variance": 0.0,
+      "report": 1,
+      "object": null,
+      "client": null,
+      "device": null
+    },
+    {
+      "id": 3211,
+      "parameter": {
+        "id": 1164,
+        "name": "Tco",
+        "desc": "OG2 (parter) T rzecz. zasila. 1",
+        "facilities": [
+          "Siedziba PROMAR"
+        ],
+        "unit": {
+          "id": 67,
+          "name": "Temperatura centralnego ogrzewania",
+          "symbol": "°C",
+          "type": 2,
+          "min_show_value": "",
+          "max_show_value": ""
+        },
+        "pmc": "PMC1180"
+      },
+      "timestamp": "2018-02-01T11:00:00",
+      "avg": 37.0,
+      "count": 20.0,
+      "min": 37.0,
+      "max": 37.0,
+      "std_dev": 0.0,
+      "sum": 740.0,
+      "variance": 0.0,
+      "report": 1,
+      "object": null,
+      "client": null,
+      "device": null
+    },
+    {
+      "id": 3210,
+      "parameter": {
+        "id": 1181,
+        "name": "Og3-temp-zew",
+        "desc": "Og3-temp-zew",
+        "facilities": [
+          "Siedziba PROMAR"
+        ],
+        "unit": {
+          "id": 46,
+          "name": "Temperatura zewnętrzna",
+          "symbol": "°C",
+          "type": 2,
+          "min_show_value": "",
+          "max_show_value": ""
+        },
+        "pmc": "PMC1180"
+      },
+      "timestamp": "2018-02-01T11:00:00",
+      "avg": 64.5,
+      "count": 20.0,
+      "min": 60.0,
+      "max": 70.0,
+      "std_dev": 4.9749371855331,
+      "sum": 1290.0,
+      "variance": 24.75,
+      "report": 1,
+      "object": null,
+      "client": null,
+      "device": null
+    },
+    {
+      "id": 3212,
+      "parameter": {
+        "id": 1181,
+        "name": "Og3-temp-zew",
+        "desc": "Og3-temp-zew",
+        "facilities": [
+          "Siedziba PROMAR"
+        ],
+        "unit": {
+          "id": 46,
+          "name": "Temperatura zewnętrzna",
+          "symbol": "°C",
+          "type": 2,
+          "min_show_value": "",
+          "max_show_value": ""
+        },
+        "pmc": "PMC1180"
+      },
+      "timestamp": "2018-02-01T12:00:00",
+      "avg": 70.0,
+      "count": 20.0,
+      "min": 70.0,
+      "max": 70.0,
+      "std_dev": 0.0,
+      "sum": 1400.0,
+      "variance": 0.0,
+      "report": 1,
+      "object": null,
+      "client": null,
+      "device": null
+    },
+    {
+      "id": 3213,
+      "parameter": {
+        "id": 1164,
+        "name": "Tco",
+        "desc": "OG2 (parter) T rzecz. zasila. 1",
+        "facilities": [
+          "Siedziba PROMAR"
+        ],
+        "unit": {
+          "id": 67,
+          "name": "Temperatura centralnego ogrzewania",
+          "symbol": "°C",
+          "type": 2,
+          "min_show_value": "",
+          "max_show_value": ""
+        },
+        "pmc": "PMC1180"
+      },
+      "timestamp": "2018-02-01T12:00:00",
+      "avg": 37.0,
+      "count": 20.0,
+      "min": 37.0,
+      "max": 37.0,
+      "std_dev": 0.0,
+      "sum": 740.0,
+      "variance": 0.0,
+      "report": 1,
+      "object": null,
+      "client": null,
+      "device": null
+    },
+    {
+      "id": 3215,
+      "parameter": {
+        "id": 1164,
+        "name": "Tco",
+        "desc": "OG2 (parter) T rzecz. zasila. 1",
+        "facilities": [
+          "Siedziba PROMAR"
+        ],
+        "unit": {
+          "id": 67,
+          "name": "Temperatura centralnego ogrzewania",
+          "symbol": "°C",
+          "type": 2,
+          "min_show_value": "",
+          "max_show_value": ""
+        },
+        "pmc": "PMC1180"
+      },
+      "timestamp": "2018-02-01T13:00:00",
+      "avg": 36.9,
+      "count": 20.0,
+      "min": 36.0,
+      "max": 37.0,
+      "std_dev": 0.3,
+      "sum": 738.0,
+      "variance": 0.09,
+      "report": 1,
+      "object": null,
+      "client": null,
+      "device": null
+    },
+    {
+      "id": 3214,
+      "parameter": {
+        "id": 1181,
+        "name": "Og3-temp-zew",
+        "desc": "Og3-temp-zew",
+        "facilities": [
+          "Siedziba PROMAR"
+        ],
+        "unit": {
+          "id": 46,
+          "name": "Temperatura zewnętrzna",
+          "symbol": "°C",
+          "type": 2,
+          "min_show_value": "",
+          "max_show_value": ""
+        },
+        "pmc": "PMC1180"
+      },
+      "timestamp": "2018-02-01T13:00:00",
+      "avg": 76.5,
+      "count": 20.0,
+      "min": 70.0,
+      "max": 80.0,
+      "std_dev": 4.76969600708473,
+      "sum": 1530.0,
+      "variance": 22.75,
+      "report": 1,
+      "object": null,
+      "client": null,
+      "device": null
+    },
+    {
+      "id": 3217,
+      "parameter": {
+        "id": 1164,
+        "name": "Tco",
+        "desc": "OG2 (parter) T rzecz. zasila. 1",
+        "facilities": [
+          "Siedziba PROMAR"
+        ],
+        "unit": {
+          "id": 67,
+          "name": "Temperatura centralnego ogrzewania",
+          "symbol": "°C",
+          "type": 2,
+          "min_show_value": "",
+          "max_show_value": ""
+        },
+        "pmc": "PMC1180"
+      },
+      "timestamp": "2018-02-01T14:00:00",
+      "avg": 34.7,
+      "count": 20.0,
+      "min": 31.0,
+      "max": 36.0,
+      "std_dev": 1.84661853126194,
+      "sum": 694.0,
+      "variance": 3.41,
+      "report": 1,
+      "object": null,
+      "client": null,
+      "device": null
+    },
+    {
+      "id": 3216,
+      "parameter": {
+        "id": 1181,
+        "name": "Og3-temp-zew",
+        "desc": "Og3-temp-zew",
+        "facilities": [
+          "Siedziba PROMAR"
+        ],
+        "unit": {
+          "id": 46,
+          "name": "Temperatura zewnętrzna",
+          "symbol": "°C",
+          "type": 2,
+          "min_show_value": "",
+          "max_show_value": ""
+        },
+        "pmc": "PMC1180"
+      },
+      "timestamp": "2018-02-01T14:00:00",
+      "avg": 78.0,
+      "count": 20.0,
+      "min": 70.0,
+      "max": 80.0,
+      "std_dev": 4.0,
+      "sum": 1560.0,
+      "variance": 16.0,
+      "report": 1,
+      "object": null,
+      "client": null,
+      "device": null
+    }
+  ]
+}
