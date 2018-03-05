@@ -32,7 +32,7 @@ d3.json("./config.json", function(config) {
         domains.forEach((domain, domainIndex) => { // DOMAINS
             var domainName = domain.name;
             var domainClass = "domain-" + domainName;
-            var y = yScaleAndDraw(g.g, domainIndex, g.height, domain.min, domain.max, zoomClass + " " + domainClass);
+            var y = yScaleAndDraw(domainName, g.g, domainIndex, g.height, domain.min, domain.max, zoomClass + " " + domainClass);
             var line = d3.line()
                 .x(function(d) { return x(d.date); })
                 .y(function(d) { return y(d.value); });
@@ -55,11 +55,6 @@ d3.json("./config.json", function(config) {
                     });
             });
         });
-
-        // g.g.on("mouseout", function(d) {
-        //     console.log("Mouse out g");
-        //     d3.selectAll("." + zoomClass).attr("opacity", 1);
-        // });
 
         // METHODS /////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -88,7 +83,7 @@ d3.json("./config.json", function(config) {
             return x;
         }
 
-        function yScaleAndDraw(g, idx, height, min, max, clazz) {
+        function yScaleAndDraw(domain, g, idx, height, min, max, clazz) {
             var y = d3.scaleLinear()
                 .domain([min, max])
                 .range([height, 0]);
@@ -96,6 +91,10 @@ d3.json("./config.json", function(config) {
                 .attr("transform", "translate(-" + (idx * yAxisOffset) + ", 0)")
                 .attr("class", clazz)
                 .call(d3.axisLeft(y));
+            g.append("text")
+                .text(domain)
+                .attr("class", clazz)
+                .attr("transform", "translate(" + -(idx * yAxisOffset - 3) + ", 0) rotate(90)");
             return y;
         }
     });
