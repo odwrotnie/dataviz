@@ -66,6 +66,7 @@ d3.json("./config.json", function(config) {
                     .data(ds.values)
                     .enter()
                     .append("circle")
+                    .attr("class", zoomClass + " " + domainClass)
                     .attr("cx", function (d) { return x(d.date); })
                     .attr("cy", function (d) { return y(d.value); })
                     .attr('fill', color(colorIndex++))

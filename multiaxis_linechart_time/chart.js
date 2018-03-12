@@ -4,6 +4,9 @@ d3.json("./config.json", function(config) {
     d3.json("../lib/d3-time-format.json", function(error, locale) { // https://unpkg.com/d3-time-format@2/locale/pl-PL.json
         if (error) throw error;
 
+
+        var dotSize = 2;
+
         d3.timeFormatDefaultLocale(locale);
 
         var parseTime = d3.timeParse(config.dateFormat);
@@ -32,13 +35,13 @@ d3.json("./config.json", function(config) {
         var colorIndex = 0;
 
         domains.forEach((domain, domainIndex) => { // DOMAINS
-            var domainName = domain.name;
+            var domainName = slugify(domain.name);
             var domainClass = "domain-" + domainName;
             var y = yScaleAndDraw(domainName, g.g, domainIndex, g.height, domain.min, domain.max, zoomClass + " " + domainClass);
             var line = d3.line()
                 .x(function(d) { return x(d.date); })
                 .y(function(d) { return y(d.value); });
-            domain.dataSets.forEach( (ds, dataSetIndex) => {
+            domain.dataSets.forEach((ds, dataSetIndex) => {
                 g.g.append("path") // PLOT
                     .attr("class", zoomClass + " " + domainClass)
                     .attr('stroke', color(colorIndex))
@@ -47,10 +50,11 @@ d3.json("./config.json", function(config) {
                     .data(ds.values)
                     .enter()
                     .append("circle")
+                    .attr("class", zoomClass + " " + domainClass)
                     .attr("cx", function (d) { return x(d.date); })
                     .attr("cy", function (d) { return y(d.value); })
                     .attr('fill', color(colorIndex++))
-                    .attr("r", 4)
+                    .attr("r", dotSize)
                     .on("mouseout", function() {
                         //console.log("Mouse out domain: " + domainName);
                         d3.selectAll("." + zoomClass)
@@ -61,12 +65,12 @@ d3.json("./config.json", function(config) {
                     .on("mouseover", function(d) {
                         //console.log("Mouse over domain: " + y());
                         d3.selectAll("." + zoomClass)
-                            .transition().duration(100).attr("opacity", 0.3);
+                            .transition().duration(100).attr("opacity", 0.15);
                         d3.selectAll("." + domainClass)
                             .transition().duration(100).attr("opacity", 1);
                         g.g.append("text")
                             .text(d.value)
-                            .attr("class", deleteClass)
+                            .attr("class",  "white " + deleteClass)
                             .attr("alignment-baseline", "central")
                             .attr("transform", "translate(" + (x(d.date) + 5) + ", " + (y(d.value)) + ")");
                         g.g.append("text")
@@ -75,6 +79,11 @@ d3.json("./config.json", function(config) {
                             .attr("text-anchor", "end")
                             .attr("alignment-baseline", "central")
                             .attr("transform", "translate(" + (x(d.date) - 5) + ", " + (y(d.value)) + ")");
+                        console.log(ds.values);
+                        g.g.append("line")
+                            .attr("class", "trend " + deleteClass)
+                            .attr("x1", x(startDate)).attr("y1", y(ds.values[0].value))
+                            .attr("x2", x(endDate)).attr("y2", y(ds.values[ds.values.length - 1].value))
                     });
             });
         });
@@ -107,8 +116,9 @@ d3.json("./config.json", function(config) {
         }
 
         function yScaleAndDraw(domain, g, idx, height, min, max, clazz) {
+            var width = Math.abs(max - min);
             var y = d3.scaleLinear()
-                .domain([min, max])
+                .domain([min - 0.03 * width, max + 0.03 * width])
                 .range([height, 0]);
             g.append("g")
                 .attr("transform", "translate(-" + (idx * yAxisOffset) + ", 0)")
@@ -119,6 +129,15 @@ d3.json("./config.json", function(config) {
                 .attr("class", clazz)
                 .attr("transform", "translate(" + -(idx * yAxisOffset - 3) + ", 0) rotate(90)");
             return y;
+        }
+
+        function slugify(text) {
+            return text.toString().toLowerCase()
+                .replace(/\s+/g, '-')           // Replace spaces with -
+                .replace(/[^\w\-]+/g, '')       // Remove all non-word chars
+                .replace(/\-\-+/g, '-')         // Replace multiple - with single -
+                .replace(/^-+/, '')             // Trim - from start of text
+                .replace(/-+$/, '');            // Trim - from end of text
         }
     });
 });
