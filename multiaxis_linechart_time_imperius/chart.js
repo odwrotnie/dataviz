@@ -57,7 +57,7 @@ d3.json("./config.json", function(config) {
             var line = d3.line()
                 .x(function(d) { return x(d.date); })
                 .y(function(d) { return y(d.value); });
-            domain.dataSets.forEach( (ds, dataSetIndex) => {
+            domain.dataSets.forEach((ds, dataSetIndex) => {
                 g.g.append("path") // PLOT
                     .attr("class", zoomClass + " " + domainClass)
                     .attr('stroke', color(colorIndex))
@@ -81,12 +81,12 @@ d3.json("./config.json", function(config) {
                     .on("mouseover", function(d) {
                         //console.log("Mouse over domain: " + y());
                         d3.selectAll("." + zoomClass)
-                            .transition().duration(100).attr("opacity", 0.3);
+                            .transition().duration(100).attr("opacity", 0.15);
                         d3.selectAll("." + domainClass)
                             .transition().duration(100).attr("opacity", 1);
                         g.g.append("text")
                             .text(d.value)
-                            .attr("class", deleteClass)
+                            .attr("class",  "white " + deleteClass)
                             .attr("alignment-baseline", "central")
                             .attr("transform", "translate(" + (x(d.date) + 5) + ", " + (y(d.value)) + ")");
                         g.g.append("text")
@@ -95,6 +95,11 @@ d3.json("./config.json", function(config) {
                             .attr("text-anchor", "end")
                             .attr("alignment-baseline", "central")
                             .attr("transform", "translate(" + (x(d.date) - 5) + ", " + (y(d.value)) + ")");
+                        console.log(ds.values);
+                        g.g.append("line")
+                            .attr("class", "trend " + deleteClass)
+                            .attr("x1", x(startDate)).attr("y1", y(ds.values[0].value))
+                            .attr("x2", x(endDate)).attr("y2", y(ds.values[ds.values.length - 1].value))
                     });
             });
         });

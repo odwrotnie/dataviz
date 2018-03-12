@@ -8,6 +8,7 @@ d3.json("./config.json", function(config) {
         var dotSize = 2;
 
         d3.timeFormatDefaultLocale(locale);
+        var dateTimeFormat = d3.timeFormat(locale.dateTime);
 
         var parseTime = d3.timeParse(config.dateFormat);
         //var data = config.dataSets;
@@ -74,7 +75,7 @@ d3.json("./config.json", function(config) {
                             .attr("alignment-baseline", "central")
                             .attr("transform", "translate(" + (x(d.date) + 5) + ", " + (y(d.value)) + ")");
                         g.g.append("text")
-                            .text(d.date)
+                            .text(dateTimeFormat(d.date))
                             .attr("class", deleteClass)
                             .attr("text-anchor", "end")
                             .attr("alignment-baseline", "central")
