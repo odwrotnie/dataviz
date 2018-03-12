@@ -37,6 +37,7 @@ d3.json("./config.json", function(config) {
 
         d3.timeFormatDefaultLocale(locale);
         var dateTimeFormat = d3.timeFormat(locale.dateTime);
+        var numberFormat = d3.format(".2f");
 
         var yAxisOffset = 60;
 
@@ -85,7 +86,7 @@ d3.json("./config.json", function(config) {
                         d3.selectAll("." + domainClass)
                             .transition().duration(100).attr("opacity", 1);
                         g.g.append("text")
-                            .text(d.value)
+                            .text(numberFormat(d.value))
                             .attr("class",  "white " + deleteClass)
                             .attr("alignment-baseline", "central")
                             .attr("transform", "translate(" + (x(d.date) + 5) + ", " + (y(d.value)) + ")");
@@ -132,8 +133,9 @@ d3.json("./config.json", function(config) {
         }
 
         function yScaleAndDraw(domain, g, idx, height, min, max, clazz) {
+            var width = Math.abs(max - min);
             var y = d3.scaleLinear()
-                .domain([min, max])
+                .domain([min - 0.03 * width, max + 0.03 * width])
                 .range([height, 0]);
             g.append("g")
                 .attr("transform", "translate(-" + (idx * yAxisOffset) + ", 0)")

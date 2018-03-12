@@ -9,6 +9,7 @@ d3.json("./config.json", function(config) {
 
         d3.timeFormatDefaultLocale(locale);
         var dateTimeFormat = d3.timeFormat(locale.dateTime);
+        var numberFormat = d3.format(".2f");
 
         var parseTime = d3.timeParse(config.dateFormat);
         //var data = config.dataSets;
@@ -70,7 +71,7 @@ d3.json("./config.json", function(config) {
                         d3.selectAll("." + domainClass)
                             .transition().duration(100).attr("opacity", 1);
                         g.g.append("text")
-                            .text(d.value)
+                            .text(numberFormat(d.value))
                             .attr("class",  "white " + deleteClass)
                             .attr("alignment-baseline", "central")
                             .attr("transform", "translate(" + (x(d.date) + 5) + ", " + (y(d.value)) + ")");
