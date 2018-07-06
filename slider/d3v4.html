@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<style>
+
+.line {
+  fill: none;
+}
+
+.legend-text {
+  font: 12px sans-serif;
+}
+
+.chart-tooltip {
+  font: 12px sans-serif;
+  position:absolute;
+  background-color:#fff;
+  border: 1px solid black;
+  padding:5px;
+  display:none
+}
+
+.chart-tooltip .value {
+  margin:0;
+  font-weight: bold;
+}
+
+</style>
+<svg width="960" height="700"></svg>
+<div id="tooltip" class="chart-tooltip"></div>
+<script src="//d3js.org/d3.v4.min.js"></script>
+<script>
+
+var parseTime = d3.timeParse("%Y%m%d");
+
+var locale = {
+  dateTime: "%d/%m/%Y %H:%M:%S",
+  date: "%d/%m/%Y",
+  time: "%H:%M:%S",
+  periods: [
+    "AM",
+    "PM"
+  ],
+  days: [
+    "Niedziela",
+    "Poniedziałek",
+    "Wtorek",
+    "Środa",
+    "Czwartek",
+    "Piątek",
+    "Sobota"
+  ],
+  shortDays: [
+    "Niedz.",
+    "Pon.",
+    "Wt.",
+    "Śr.",
+    "Czw.",
+    "Pt.",
+    "Sob."
+  ],
+  months: [
+    "Styczeń",
+    "Luty",
+    "Marzec",
+    "Kwiecień",
+    "Maj",
+    "Czerwiec",
+    "Lipiec",
+    "Sierpień",
+    "Wrzesień",
+    "Październik",
+    "Listopad",
+    "Grudzień"
+  ],
+  shortMonths: [
+    "Sty.",
+    "Lut",
+    "Mar.",
+    "Kwi.",
+    "Maj",
+    "Cze.",
+    "Lip.",
+    "Sie.",
+    "Wrz.",
+    "Paź.",
+    "Lis.",
+    "Gru."
+  ]
+}
+
+d3.tsv("data.tsv", type, function(error, data) {
+  if (error) throw error;
+
+  var converted_data = data.columns.slice(1).map(function(id) {
+    return {
+      id: id,
+      values: data.map(function(d) {
+        return {timestamp: d.timestamp, value: d[id]};
+      })
+    };
+  });
+
+  console.log(converted_data)
+
+  var dotSize = 2;
+  var interpolation = d3.curveStepAfter;
+  var yAxisOffset = 50;
+  var yAxisCount = converted_data.length;
+  var yAxisCountLeft = Math.ceil(yAxisCount / 2);
+  var yAxisCountRight = Math.floor(yAxisCount / 2);
+  d3.timeFormatDefaultLocale(locale);
+  var tickFormat=function(date){
+    if(date.getMinutes()) return d3.timeFormat('%H:%M')(date);
+    if(date.getHours()) return d3.timeFormat('%H:%M')(date);
+    if(date.getDay()&&date.getDate()!=1) return d3.timeFormat('%a %d')(date);
+    if(date.getDate()!=1) return d3.timeFormat('%b %d')(date);
+    if(date.getMonth()) return d3.timeFormat('%B')(date);
+    return d3.timeFormat('%Y')(date);
+  }
+  var dateTimeFormat = d3.timeFormat(locale.dateTime);
+  var numberFormat = d3.format(".2f");
+
+  var svg = d3.select("svg"),
+      margin = {top: 20, right: 10 + yAxisOffset * yAxisCountRight, bottom: 310, left: 10 + yAxisOffset * yAxisCountLeft},
+      margin_brush = {top: 430, right: 10 + yAxisOffset * yAxisCountRight, bottom: 230, left: 10 + yAxisOffset * yAxisCountLeft},
+      width = svg.attr("width") - margin.left - margin.right,
+      height = svg.attr("height") - margin.top - margin.bottom,
+      height_brush = svg.attr("height") - margin_brush.top - margin_brush.bottom,
+      margin_legend = {top: 30 + margin_brush.top + height_brush, left: margin_brush.left},
+      g = svg.append("g").attr("transform", "translate(" + margin.left + "," + margin.top + ")"),
+      g_brush = svg.append("g").attr("transform", "translate(" + margin_brush.left + "," + margin_brush.top + ")");
+
+ var tooltip = d3.select('#tooltip');
+ var tooltipLine = g.append('line');
+
+  var x = d3.scaleTime().range([0, width]),
+      x_brush = d3.scaleTime().range([0, width]),
+      z = d3.scaleOrdinal(d3.schemeCategory10),
+      colors = d3.scaleOrdinal(d3.schemeCategory10);
+
+  var brush = d3.brushX()
+        .extent([[0, 0], [width, height_brush]])
+        .on("brush end", brushed);
+
+  x.domain(d3.extent(data, function(d) { return d.timestamp; }));
+  z.domain(converted_data.map(function(c) { return c.id; }));
+  x_brush.domain(x.domain());
+
+  g.append("g")
+      .attr("class", "axis axis--x")
+      .attr("transform", "translate(0," + height + ")")
+      .call(d3.axisBottom(x).tickFormat(tickFormat));
+
+  for (var i = 0; i < converted_data.length; i++) {
+    var yScale = d3.scaleLinear().range([height, 0])
+          .domain([
+            d3.min(converted_data[i].values, function(d) { return d.value; }),
+            d3.max(converted_data[i].values, function(d) { return d.value; })
+          ]);
+    if(isEven(i)) {
+      g.append("g")
+          .attr("class", "axis axis--y")
+          .attr("transform", "translate(-" + Math.ceil(i / 2) * yAxisOffset + ")")
+          .call(d3.axisLeft(yScale))
+        .append("text")
+          .attr("transform", "rotate(-90)")
+          .attr("y", 6)
+          .attr("dy", "0.71em")
+          .attr("fill", "#000")
+          .text(converted_data[i].id + "");
+    } else {
+      g.append("g")
+          .attr("class", "axis axis--y")
+          .attr("transform", "translate(-" + Math.floor(i / 2) * yAxisOffset + ")")
+          .attr("transform", "translate( " + width + ", 0 )")
+          .call(d3.axisRight(yScale))
+        .append("text")
+          .attr("transform", "rotate(-90)")
+          .attr("y", -12)
+          .attr("dy", "0.71em")
+          .attr("fill", "#000")
+          .style("text-anchor", "end")
+          .text(converted_data[i].id + "")
+    }
+  }
+
+  var chartLine = g.selectAll(".line")
+    .data(converted_data)
+    .enter()
+    .append("g")
+    .attr("class", "line");
+
+  var index = 0;
+  chartLine.append("path")
+      .attr("class", "line-path")
+      .attr("d", function(d) {
+        var yScale = d3.scaleLinear().range([height, 0])
+              .domain([
+                d3.min(d.values, function(d) { return d.value; }),
+                d3.max(d.values, function(d) { return d.value; })
+              ]);
+        var line = d3.line()
+            .x(function(d) { return x(d.timestamp); })
+            .y(function(d) { return yScale(d.value); });
+            // g.selectAll("dot")
+            // .data(d.values)
+            // .enter()
+            // .append("circle")
+            // .attr('class', 'dot dot-line-' + index)
+            // .attr("r", dotSize)
+            // .attr('fill', colors(index++))
+            // .attr("cx", function(d) { return x(d.timestamp); })
+            // .attr("cy", function(d) { return yScale(d.value); });
+        return line(d.values);
+      })
+      .style("stroke", function(d) { return z(d.id); });
+
+      var legend = svg.append("g")
+      .attr("transform", "translate(" + margin_legend.left + "," + margin_legend.top + ")")
+      .selectAll('rect')
+      .data(converted_data)
+      .enter()
+      .append('g').attr("transform", function (d, i) {
+        {
+            return "translate(0," + i * 20 + ")"
+        }
+      })
+
+      legend.append('rect')
+        .attr("x", 0)
+        .attr("y", 0)
+        .attr("width", 10)
+        .attr("height", 10)
+      .style("fill", function (d, i) {
+          return colors(i)
+      })
+
+      legend.append('text')
+        .attr("class", "legend-text")
+        .attr("x", 20)
+        .attr("y", 10)
+        .text(function (d, i) {
+            return d.id
+        })
+
+  var chartLine_brush = g_brush.selectAll(".line")
+    .data(converted_data)
+    .enter().append("g")
+    .attr("class", "line");
+
+  chartLine_brush.append("path")
+      .attr("class", "line-path")
+      .attr("d", function(d) {
+        var yScale = d3.scaleLinear().range([height_brush, 0])
+              .domain([
+                d3.min(d.values, function(d) { return d.value; }),
+                d3.max(d.values, function(d) { return d.value; })
+              ]);
+        var line = d3.line()
+            .curve(d3.curveBasis)
+            .x(function(d) { return x_brush(d.timestamp); })
+            .y(function(d) { return yScale(d.value); });
+        return line(d.values);
+      })
+      .style("stroke", function(d) { return z(d.id); });
+
+  g_brush.append("g")
+      .attr("class", "axis axis--x")
+      .attr("transform", "translate(0," + height_brush + ")")
+      .call(d3.axisBottom(x_brush));
+
+  g_brush.append("g")
+      .attr("class", "brush")
+      .call(brush)
+      .call(brush.move, x.range());
+
+  tipBox = svg.append('rect')
+    .attr('width', width)
+    .attr('height', height)
+    .attr("transform", "translate(" + margin.left + "," + margin.top + ")")
+    .attr('opacity', 0)
+    .on('mousemove', drawTooltip)
+    .on('mouseout', removeTooltip);
+
+  function brushed() {
+    var index = 0;
+    var s = d3.event.selection
+    x.domain(s.map(x_brush.invert, x_brush));
+    g.selectAll('.line-path').attr("d", function(d) {
+      var yScale = d3.scaleLinear().range([height, 0])
+            .domain([
+              d3.min(d.values, function(d) { return d.value; }),
+              d3.max(d.values, function(d) { return d.value; })
+            ]);
+      var line = d3.line()
+          .curve(interpolation)
+          .x(function(d) { return x(d.timestamp); })
+          .y(function(d) { return yScale(d.value); });
+      // g.selectAll(".dot-line-" + index)
+      //       .attr("cx", function(d) { return x(d.timestamp); })
+      //       .attr("cy", function(d) { return yScale(d.value); });
+      //index++
+      return line(d.values);
+    });
+    g.select(".axis--x").call(d3.axisBottom(x).tickFormat(tickFormat));
+  }
+
+  function removeTooltip() {
+  if (tooltip) tooltip.style('display', 'none');
+  if (tooltipLine) tooltipLine.attr('stroke', 'none');
+}
+
+function drawTooltip() {
+  var date = x.invert(d3.mouse(tipBox.node())[0])
+  var bisectDate = d3.bisector(function(d) { return d.timestamp; }).left
+  dateBisectDate = data[bisectDate(data, date, 1)];
+
+  // states.sort((a, b) => {
+  //   return b.history.find(h => h.year == year).population - a.history.find(h => h.year == year).population;
+  // })
+
+  tooltipLine.attr('stroke', 'black')
+    .attr('stroke-dasharray', '4')
+    .attr('x1', x(dateBisectDate.timestamp))
+    .attr('x2', x(dateBisectDate.timestamp))
+    .attr('y1', 0)
+    .attr('y2', height);
+// converted data pobrac kolor itd
+  tooltip.html(dateTimeFormat(dateBisectDate.timestamp))
+    .style('display', 'block')
+    .style('left', d3.event.pageX + 20 + "px")
+    .style('top', d3.event.pageY - 20 + "px")
+    .selectAll(".value")
+      .data(converted_data)
+      .enter()
+      .append("p")
+      .attr("class", "value")
+      .attr("style", function(d, i) {
+        return "color:" + colors(i);
+      })
+      .html(d => d.values.find(t => t.timestamp.getTime() === dateBisectDate.timestamp.getTime()).value);
+}
+
+});
+
+function type(d, _, columns) {
+  d.timestamp = parseTime(d.timestamp);
+  for (var i = 1, n = columns.length, c; i < n; ++i) d[c = columns[i]] = +d[c];
+  return d;
+}
+
+function isEven(value){
+    if (value%2 === 0)
+        return true;
+    else
+        return false;
+}
+</script>
